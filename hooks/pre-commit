@@ -23,7 +23,7 @@ function __run() #(step, name, cmd)
     fi
 }
 
-phpcs="docker exec cheshirecat-php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src/"
+phpcs="docker exec cheshirecat-php-sdk tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src/"
 
 __run "1/2" "cs-fixer" "${phpcs}"
-__run "2/2" "phpstan" "docker exec cheshirecat-php vendor/bin/phpstan analyse"
+__run "2/2" "phpstan" "docker exec cheshirecat-php-sdk vendor/bin/phpstan analyse"

@@ -1,6 +1,6 @@
 services:
   php:
-    container_name: cheshirecat-php
+    container_name: cheshirecat-php-sdk
     build:
       context: ./docker/php
       args:
@@ -9,4 +9,4 @@ services:
     ports:
       - "8082:8081"
     volumes:
-      - ./:/var/www/cheshirecat-php
+      - ./:/var/www/cheshirecat-php-sdk
