@@ -21,7 +21,7 @@ Perhaps, you also need to add the following repositories to your composer.json f
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/matteocacciola/cheshire-cat-php-sdk"
+            "url": "https://github.com/matteocacciola/cheshirecat-php-sdk"
         }
     ]
 }
