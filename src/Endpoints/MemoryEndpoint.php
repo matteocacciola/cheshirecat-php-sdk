@@ -1,20 +1,20 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Endpoints;
+namespace DataMat\CheshireCat\Endpoints;
 
-use Albocode\CcatphpSdk\DTO\Api\Memory\CollectionPointsDestroyOutput;
-use Albocode\CcatphpSdk\DTO\Api\Memory\CollectionsOutput;
-use Albocode\CcatphpSdk\DTO\Api\Memory\ConversationHistoryDeleteOutput;
-use Albocode\CcatphpSdk\DTO\Api\Memory\ConversationHistoryOutput;
-use Albocode\CcatphpSdk\DTO\Api\Memory\MemoryPointDeleteOutput;
-use Albocode\CcatphpSdk\DTO\Api\Memory\MemoryPointOutput;
-use Albocode\CcatphpSdk\DTO\Api\Memory\MemoryPointsDeleteByMetadataOutput;
-use Albocode\CcatphpSdk\DTO\Api\Memory\MemoryPointsOutput;
-use Albocode\CcatphpSdk\DTO\Api\Memory\MemoryRecallOutput;
-use Albocode\CcatphpSdk\DTO\MemoryPoint;
-use Albocode\CcatphpSdk\DTO\Why;
-use Albocode\CcatphpSdk\Enum\Collection;
-use Albocode\CcatphpSdk\Enum\Role;
+use DataMat\CheshireCat\DTO\Api\Memory\CollectionPointsDestroyOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\CollectionsOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\ConversationHistoryDeleteOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\ConversationHistoryOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointDeleteOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointsDeleteByMetadataOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointsOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\MemoryRecallOutput;
+use DataMat\CheshireCat\DTO\MemoryPoint;
+use DataMat\CheshireCat\DTO\Why;
+use DataMat\CheshireCat\Enum\Collection;
+use DataMat\CheshireCat\Enum\Role;
 use GuzzleHttp\Exception\GuzzleException;
 use RuntimeException;
 

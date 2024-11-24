@@ -1,9 +1,9 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Endpoints;
+namespace DataMat\CheshireCat\Endpoints;
 
-use Albocode\CcatphpSdk\DTO\Api\Message\MessageOutput;
-use Albocode\CcatphpSdk\DTO\Message;
+use DataMat\CheshireCat\DTO\Api\Message\MessageOutput;
+use DataMat\CheshireCat\DTO\Message;
 use Closure;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;

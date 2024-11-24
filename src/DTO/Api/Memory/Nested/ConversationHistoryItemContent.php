@@ -1,9 +1,9 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Memory\Nested;
+namespace DataMat\CheshireCat\DTO\Api\Memory\Nested;
 
-use Albocode\CcatphpSdk\DTO\MessageBase;
-use Albocode\CcatphpSdk\DTO\Why;
+use DataMat\CheshireCat\DTO\MessageBase;
+use DataMat\CheshireCat\DTO\Why;
 
 class ConversationHistoryItemContent extends MessageBase
 {

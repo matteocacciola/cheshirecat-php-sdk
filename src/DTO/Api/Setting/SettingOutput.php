@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Setting;
+namespace DataMat\CheshireCat\DTO\Api\Setting;
 
 class SettingOutput
 {

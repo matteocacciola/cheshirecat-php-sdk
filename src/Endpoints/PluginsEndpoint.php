@@ -1,11 +1,11 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Endpoints;
+namespace DataMat\CheshireCat\Endpoints;
 
-use Albocode\CcatphpSdk\DTO\Api\Plugin\PluginCollectionOutput;
-use Albocode\CcatphpSdk\DTO\Api\Plugin\PluginsSettingsOutput;
-use Albocode\CcatphpSdk\DTO\Api\Plugin\PluginToggleOutput;
-use Albocode\CcatphpSdk\DTO\Api\Plugin\Settings\PluginSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginCollectionOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginsSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginToggleOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\Settings\PluginSettingsOutput;
 use GuzzleHttp\Exception\GuzzleException;
 
 class PluginsEndpoint extends AbstractEndpoint

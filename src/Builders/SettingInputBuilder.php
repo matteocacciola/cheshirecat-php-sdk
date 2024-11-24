@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Builders;
+namespace DataMat\CheshireCat\Builders;
 
-use Albocode\CcatphpSdk\DTO\SettingInput;
+use DataMat\CheshireCat\DTO\SettingInput;
 
 class SettingInputBuilder implements BaseBuilder
 {

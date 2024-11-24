@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Builders;
+namespace DataMat\CheshireCat\Builders;
 
 interface BaseBuilder
 {

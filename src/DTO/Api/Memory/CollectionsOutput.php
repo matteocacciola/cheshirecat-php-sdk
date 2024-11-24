@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Memory;
+namespace DataMat\CheshireCat\DTO\Api\Memory;
 
-use Albocode\CcatphpSdk\DTO\Api\Memory\Nested\CollectionsItem;
+use DataMat\CheshireCat\DTO\Api\Memory\Nested\CollectionsItem;
 
 class CollectionsOutput
 {

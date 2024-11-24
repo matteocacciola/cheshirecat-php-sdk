@@ -1,9 +1,9 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\Clients\WSClient;
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\Clients\WSClient;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 

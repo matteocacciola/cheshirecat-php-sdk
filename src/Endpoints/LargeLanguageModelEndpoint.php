@@ -1,9 +1,9 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Endpoints;
+namespace DataMat\CheshireCat\Endpoints;
 
-use Albocode\CcatphpSdk\DTO\Api\Factory\FactoryObjectSettingOutput;
-use Albocode\CcatphpSdk\DTO\Api\Factory\FactoryObjectSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingOutput;
+use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingsOutput;
 use GuzzleHttp\Exception\GuzzleException;
 
 class LargeLanguageModelEndpoint extends AbstractEndpoint

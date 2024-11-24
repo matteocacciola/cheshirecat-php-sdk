@@ -1,9 +1,9 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\Endpoints\AbstractEndpoint;
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\Endpoints\AbstractEndpoint;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Client as HttpClient;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
@@ -40,24 +40,24 @@ class BaseTest extends TestCase
     /**
      * @throws \JsonException|Exception
      */
-    public function testGetGuzzleClientsFromCCatClientWithApikeySuccess(): void
+    public function testGetGuzzleClientsFromCheshireCatClientWithApikeySuccess(): void
     {
-        $cCatClient = $this->getCCatClient($this->apikey);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey);
 
-        self::assertInstanceOf(HttpClient::class, $cCatClient->getHttpClient()->getClient());
-        self::assertInstanceOf(WsClient::class, $cCatClient->getWsClient()->getClient());
+        self::assertInstanceOf(HttpClient::class, $cheshireCatClient->getHttpClient()->getClient());
+        self::assertInstanceOf(WsClient::class, $cheshireCatClient->getWsClient()->getClient());
     }
 
     /**
      * @throws \JsonException|Exception
      */
-    public function testGetGuzzleClientsFromCCatClientWithTokenSuccess(): void
+    public function testGetGuzzleClientsFromCheshireCatClientWithTokenSuccess(): void
     {
-        $cCatClient = $this->getCCatClient();
-        $cCatClient->addToken($this->token);
+        $cheshireCatClient = $this->getCheshireCatClient();
+        $cheshireCatClient->addToken($this->token);
 
-        self::assertInstanceOf(HttpClient::class, $cCatClient->getHttpClient()->getClient());
-        self::assertInstanceOf(WsClient::class, $cCatClient->getWsClient()->getClient());
+        self::assertInstanceOf(HttpClient::class, $cheshireCatClient->getHttpClient()->getClient());
+        self::assertInstanceOf(WsClient::class, $cheshireCatClient->getWsClient()->getClient());
     }
 
     /**
@@ -65,8 +65,8 @@ class BaseTest extends TestCase
      */
     public function testFactorySuccess(): void
     {
-        $cCatClient = $this->getCCatClient($this->apikey);
-        $endpoint = $cCatClient->admins();
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey);
+        $endpoint = $cheshireCatClient->admins();
 
         self::assertInstanceOf(AbstractEndpoint::class, $endpoint);
     }

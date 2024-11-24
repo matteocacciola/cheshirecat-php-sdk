@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk;
+namespace DataMat\CheshireCat;
 
-class CcatUtility
+class CheshireCatUtility
 {
     public static function classize(string $function) : string
     {

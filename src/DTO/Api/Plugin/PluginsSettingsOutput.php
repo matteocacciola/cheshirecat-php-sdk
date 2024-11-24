@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Plugin;
+namespace DataMat\CheshireCat\DTO\Api\Plugin;
 
-use Albocode\CcatphpSdk\DTO\Api\Plugin\Settings\PluginSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\Settings\PluginSettingsOutput;
 
 class PluginsSettingsOutput
 {

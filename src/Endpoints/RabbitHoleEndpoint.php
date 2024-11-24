@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Endpoints;
+namespace DataMat\CheshireCat\Endpoints;
 
-use Albocode\CcatphpSdk\DTO\Api\RabbitHole\AllowedMimeTypesOutput;
+use DataMat\CheshireCat\DTO\Api\RabbitHole\AllowedMimeTypesOutput;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Utils;

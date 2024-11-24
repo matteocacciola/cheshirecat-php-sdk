@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Memory\Nested;
+namespace DataMat\CheshireCat\DTO\Api\Memory\Nested;
 
 class CollectionsItem
 {

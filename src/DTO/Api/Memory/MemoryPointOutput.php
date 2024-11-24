@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Memory;
+namespace DataMat\CheshireCat\DTO\Api\Memory;
 
-use Albocode\CcatphpSdk\DTO\MemoryPoint;
+use DataMat\CheshireCat\DTO\MemoryPoint;
 
 class MemoryPointOutput extends MemoryPoint
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Endpoints;
+namespace DataMat\CheshireCat\Endpoints;
 
-use Albocode\CcatphpSdk\DTO\Api\Setting\SettingDeleteOutput;
-use Albocode\CcatphpSdk\DTO\Api\Setting\SettingOutputItem;
-use Albocode\CcatphpSdk\DTO\Api\Setting\SettingsOutputCollection;
-use Albocode\CcatphpSdk\DTO\SettingInput;
+use DataMat\CheshireCat\DTO\Api\Setting\SettingDeleteOutput;
+use DataMat\CheshireCat\DTO\Api\Setting\SettingOutputItem;
+use DataMat\CheshireCat\DTO\Api\Setting\SettingsOutputCollection;
+use DataMat\CheshireCat\DTO\SettingInput;
 use GuzzleHttp\Exception\GuzzleException;
 
 class SettingsEndpoint extends AbstractEndpoint

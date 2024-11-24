@@ -1,9 +1,9 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Message;
+namespace DataMat\CheshireCat\DTO\Api\Message;
 
-use Albocode\CcatphpSdk\DTO\MessageBase;
-use Albocode\CcatphpSdk\DTO\Why;
+use DataMat\CheshireCat\DTO\MessageBase;
+use DataMat\CheshireCat\DTO\Why;
 
 class MessageOutput extends MessageBase
 {

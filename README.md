@@ -10,9 +10,9 @@ of [Cheshire Cat](https://github.com/matteocacciola/cheshirecat-core) on a PHP P
 
 ## Installation
 
-To install CCatPHP-SDK you can run this command:
+To install CheshireCat PHP SDK you can run this command:
 ```cmd
-composer require matteocacciola/cheshire-cat-php-sdk
+composer require matteocacciola/cheshirecat-php-sdk
 ```
 
 Perhaps, you also need to add the following repositories to your composer.json file:
@@ -31,14 +31,13 @@ Perhaps, you also need to add the following repositories to your composer.json f
 Initialization and usage:
 
 ```php
-use Albocode\CcatphpSdk\CCatClient;
-use Albocode\CcatphpSdk\Clients\HttpClient;
-use Albocode\CcatphpSdk\Clients\WSClient;
+use DataMat\CheshireCat\CheshireCatClient;
+use DataMat\CheshireCat\Clients\HttpClient;
+use DataMat\CheshireCat\Clients\WSClient;
 
-
-$cCatClient = new CCatClient(
-new WSClient('cheshire_cat_core', 1865, null),
-new HttpClient('cheshire_cat_core', 1865, null)
+$cheshireCatClient = new CheshireCatClient(
+    new WSClient('cheshire_cat_core', 1865, null),
+    new HttpClient('cheshire_cat_core', 1865, null)
 );
 ```
 Send a message to the websocket:
@@ -49,9 +48,9 @@ $notificationClosure = function (string $message) {
 }
 
 // result is the result of the message
-$result = $cCatClient->message()->sendWebsocketMessage(
-new Message("Hello world!", 'user', []),  // message body
-$notificationClosure // websocket notification closure handle
+$result = $cheshireCatClient->message()->sendWebsocketMessage(
+    new Message("Hello world!", 'user', []),  // message body
+    $notificationClosure // websocket notification closure handle
 );
 
 ```
@@ -59,20 +58,20 @@ $notificationClosure // websocket notification closure handle
 Load data to the rabbit hole:
 ```php
 //file
-$promise = $this->client->rabbitHole()->postFile($uploadedFile->getPathname(), null, null);
+$promise = $cheshireCatClient->rabbitHole()->postFile($uploadedFile->getPathname(), null, null);
 $promise->wait();
 
 //url
-$promise = $this->client->rabbitHole()->postWeb($url, null,null);
+$promise = $cheshireCatClient->rabbitHole()->postWeb($url, null,null);
 $promise->wait();
 ```
 
 Memory management utilities:
 
 ```php
-$this->client->memory()->getMemoryCollections(); // get number of vectors in the working memory
-$this->client->memory()->getMemoryRecall("HELLO"); // recall memories by text
+$cheshireCatClient->memory()->getMemoryCollections(); // get number of vectors in the working memory
+$cheshireCatClient->memory()->getMemoryRecall("HELLO"); // recall memories by text
 
 //delete memory points by metadata, like this example delete by source
-$this->client->memory()->deleteMemoryPointsByMetadata(Collection.Declarative, ["source" => $url]);
+$cheshireCatClient->memory()->deleteMemoryPointsByMetadata(Collection.Declarative, ["source" => $url]);
 ```

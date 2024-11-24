@@ -1,10 +1,10 @@
 <?php
 
-namespace Albocode\CcatphpSdk;
+namespace DataMat\CheshireCat;
 
-use Albocode\CcatphpSdk\Clients\HttpClient;
-use Albocode\CcatphpSdk\Clients\WSClient;
-use Albocode\CcatphpSdk\Endpoints\AbstractEndpoint;
+use DataMat\CheshireCat\Clients\HttpClient;
+use DataMat\CheshireCat\Clients\WSClient;
+use DataMat\CheshireCat\Endpoints\AbstractEndpoint;
 use Symfony\Component\PropertyInfo\Extractor\ConstructorExtractor;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
@@ -17,19 +17,19 @@ use Symfony\Component\Serializer\Serializer;
 
 
 /**
- * @method \Albocode\CcatphpSdk\Endpoints\AdminsEndpoint admins()
- * @method \Albocode\CcatphpSdk\Endpoints\AuthHandlerEndpoint authHandler()
- * @method \Albocode\CcatphpSdk\Endpoints\EmbedderEndpoint embedder()
- * @method \Albocode\CcatphpSdk\Endpoints\LargeLanguageModelEndpoint largeLanguageModel()
- * @method \Albocode\CcatphpSdk\Endpoints\MemoryEndpoint memory()
- * @method \Albocode\CcatphpSdk\Endpoints\MessageEndpoint message()
- * @method \Albocode\CcatphpSdk\Endpoints\PluginsEndpoint plugins()
- * @method \Albocode\CcatphpSdk\Endpoints\PluginFileManagerEndpoint pluginFileManager()
- * @method \Albocode\CcatphpSdk\Endpoints\RabbitHoleEndpoint rabbitHole()
- * @method \Albocode\CcatphpSdk\Endpoints\SettingsEndpoint settings()
- * @method \Albocode\CcatphpSdk\Endpoints\UsersEndpoint users()
+ * @method \DataMat\CheshireCat\Endpoints\AdminsEndpoint admins()
+ * @method \DataMat\CheshireCat\Endpoints\AuthHandlerEndpoint authHandler()
+ * @method \DataMat\CheshireCat\Endpoints\EmbedderEndpoint embedder()
+ * @method \DataMat\CheshireCat\Endpoints\LargeLanguageModelEndpoint largeLanguageModel()
+ * @method \DataMat\CheshireCat\Endpoints\MemoryEndpoint memory()
+ * @method \DataMat\CheshireCat\Endpoints\MessageEndpoint message()
+ * @method \DataMat\CheshireCat\Endpoints\PluginsEndpoint plugins()
+ * @method \DataMat\CheshireCat\Endpoints\PluginFileManagerEndpoint pluginFileManager()
+ * @method \DataMat\CheshireCat\Endpoints\RabbitHoleEndpoint rabbitHole()
+ * @method \DataMat\CheshireCat\Endpoints\SettingsEndpoint settings()
+ * @method \DataMat\CheshireCat\Endpoints\UsersEndpoint users()
  */
-class CCatClient
+class CheshireCatClient
 {
     private WSClient $wsClient;
     private HttpClient $httpClient;
@@ -88,8 +88,8 @@ class CCatClient
 
     public function __call(string $method, $args): AbstractEndpoint
     {
-        return CCatFactory::build(
-            __NAMESPACE__ . CcatUtility::classize($method),
+        return CheshireCatFactory::build(
+            __NAMESPACE__ . CheshireCatUtility::classize($method),
             $this
         );
     }

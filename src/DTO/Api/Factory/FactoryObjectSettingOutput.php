@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Factory;
+namespace DataMat\CheshireCat\DTO\Api\Factory;
 
 class FactoryObjectSettingOutput
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Admins;
+namespace DataMat\CheshireCat\DTO\Api\Admins;
 
-use Albocode\CcatphpSdk\DTO\Api\Plugin\PluginToggleOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginToggleOutput;
 
 class PluginInstallOutput extends PluginToggleOutput
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO;
+namespace DataMat\CheshireCat\DTO;
 
 use Symfony\Component\Serializer\Annotation\SerializedName;
 

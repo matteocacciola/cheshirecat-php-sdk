@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Enum;
+namespace DataMat\CheshireCat\Enum;
 
 enum Role: string
 {

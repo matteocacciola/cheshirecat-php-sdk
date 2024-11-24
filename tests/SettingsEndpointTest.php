@@ -1,10 +1,10 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\Builders\SettingInputBuilder;
-use Albocode\CcatphpSdk\CcatUtility;
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\Builders\SettingInputBuilder;
+use DataMat\CheshireCat\CheshireCatUtility;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
@@ -41,9 +41,9 @@ class SettingsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->settings();
+        $endpoint = $cheshireCatClient->settings();
         $result = $endpoint->getSettings();
 
         foreach ($expected['settings'] as $key => $setting) {
@@ -74,18 +74,18 @@ class SettingsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
         $settingInput = SettingInputBuilder::create()
             ->setName($expected['setting']['name'])
             ->setValue($expected['setting']['value'])
             ->setCategory($expected['setting']['category'])
             ->build();
 
-        $endpoint = $cCatClient->settings();
+        $endpoint = $cheshireCatClient->settings();
         $result = $endpoint->postSetting($settingInput);
 
         foreach ($expected['setting'] as $property => $value) {
-            $p = CcatUtility::camelCase($property);
+            $p = CheshireCatUtility::camelCase($property);
             self::assertEquals($value, $result->setting->{$p});
         }
     }
@@ -107,13 +107,13 @@ class SettingsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->settings();
+        $endpoint = $cheshireCatClient->settings();
         $result = $endpoint->getSetting('123456789');
 
         foreach ($expected['setting'] as $property => $value) {
-            $p = CcatUtility::camelCase($property);
+            $p = CheshireCatUtility::camelCase($property);
             self::assertEquals($value, $result->setting->{$p});
         }
     }
@@ -136,18 +136,18 @@ class SettingsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
         $settingInput = SettingInputBuilder::create()
             ->setName($expected['setting']['name'])
             ->setValue($expected['setting']['value'])
             ->setCategory($expected['setting']['category'])
             ->build();
 
-        $endpoint = $cCatClient->settings();
+        $endpoint = $cheshireCatClient->settings();
         $result = $endpoint->putSetting('234567890', $settingInput);
 
         foreach ($expected['setting'] as $property => $value) {
-            $p = CcatUtility::camelCase($property);
+            $p = CheshireCatUtility::camelCase($property);
             self::assertEquals($value, $result->setting->{$p});
         }
     }
@@ -159,9 +159,9 @@ class SettingsEndpointTest extends TestCase
     {
         $expected = ['deleted' => true];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->settings();
+        $endpoint = $cheshireCatClient->settings();
         $result = $endpoint->deleteSetting('234567890');
 
         self::assertTrue($result->deleted);

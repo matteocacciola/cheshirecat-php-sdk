@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Memory;
+namespace DataMat\CheshireCat\DTO\Api\Memory;
 
 class MemoryPointDeleteOutput
 {

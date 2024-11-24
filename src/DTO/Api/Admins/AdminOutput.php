@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Admins;
+namespace DataMat\CheshireCat\DTO\Api\Admins;
 
 class AdminOutput
 {

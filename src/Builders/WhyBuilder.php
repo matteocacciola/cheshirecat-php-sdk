@@ -1,10 +1,10 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Builders;
+namespace DataMat\CheshireCat\Builders;
 
-use Albocode\CcatphpSdk\DTO\AgentOutput;
-use Albocode\CcatphpSdk\DTO\Memory;
-use Albocode\CcatphpSdk\DTO\Why;
+use DataMat\CheshireCat\DTO\AgentOutput;
+use DataMat\CheshireCat\DTO\Memory;
+use DataMat\CheshireCat\DTO\Why;
 
 class WhyBuilder implements BaseBuilder
 {

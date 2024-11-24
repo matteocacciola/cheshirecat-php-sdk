@@ -1,10 +1,10 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\DTO\Api\Message\MessageOutput;
-use Albocode\CcatphpSdk\DTO\Message;
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\DTO\Api\Message\MessageOutput;
+use DataMat\CheshireCat\DTO\Message;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
@@ -31,9 +31,9 @@ class MessageEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->message();
+        $endpoint = $cheshireCatClient->message();
         $response = $endpoint->sendHttpMessage(
             new Message($expected['text']), 'agent_id', 'user_id'
         );
@@ -67,9 +67,9 @@ class MessageEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->message();
+        $endpoint = $cheshireCatClient->message();
         $response = $endpoint->sendWebsocketMessage(
             new Message($expected['text']), 'agent_id', 'user_id'
         );

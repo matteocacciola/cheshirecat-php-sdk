@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Plugin;
+namespace DataMat\CheshireCat\DTO\Api\Plugin;
 
 class PluginItemOutput
 {

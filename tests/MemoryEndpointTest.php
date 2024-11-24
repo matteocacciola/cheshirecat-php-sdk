@@ -1,14 +1,14 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\Builders\MemoryBuilder;
-use Albocode\CcatphpSdk\Builders\MemoryPointBuilder;
-use Albocode\CcatphpSdk\Builders\WhyBuilder;
-use Albocode\CcatphpSdk\CcatUtility;
-use Albocode\CcatphpSdk\DTO\Api\Memory\MemoryPointsOutput;
-use Albocode\CcatphpSdk\Enum\Collection;
-use Albocode\CcatphpSdk\Enum\Role;
+use DataMat\CheshireCat\Builders\MemoryBuilder;
+use DataMat\CheshireCat\Builders\MemoryPointBuilder;
+use DataMat\CheshireCat\Builders\WhyBuilder;
+use DataMat\CheshireCat\CheshireCatUtility;
+use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointsOutput;
+use DataMat\CheshireCat\Enum\Collection;
+use DataMat\CheshireCat\Enum\Role;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
 
@@ -27,9 +27,9 @@ class MemoryEndpointTest extends BaseTest
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->getMemoryCollections();
 
         foreach ($expected['collections'] as $key => $collection) {
@@ -51,9 +51,9 @@ class MemoryEndpointTest extends BaseTest
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->deleteAllMemoryCollectionPoints();
 
         foreach ($expected['deleted'] as $key => $value) {
@@ -72,9 +72,9 @@ class MemoryEndpointTest extends BaseTest
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->deleteAllSingleMemoryCollectionPoints(Collection::Episodic);
 
         self::assertEquals($expected['deleted']['episodic'], $result->deleted['episodic']);
@@ -108,9 +108,9 @@ class MemoryEndpointTest extends BaseTest
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->getConversationHistory();
 
         self::assertEquals($expected, $result->toArray());
@@ -123,9 +123,9 @@ class MemoryEndpointTest extends BaseTest
     {
         $expected = ['deleted' => true];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->deleteConversationHistory();
 
         self::assertEquals($expected['deleted'], $result->deleted);
@@ -182,9 +182,9 @@ class MemoryEndpointTest extends BaseTest
             ->setMemory($memory)
             ->build();
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->postConversationHistory(
             Role::AI,
             $expected['history'][1]['content']['text'],
@@ -213,9 +213,9 @@ class MemoryEndpointTest extends BaseTest
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->getMemoryRecall($expected['query']['text']);
 
         self::assertEquals($expected['vectors']['embedder'], $result->vectors->embedder);
@@ -233,9 +233,9 @@ class MemoryEndpointTest extends BaseTest
             'vector' => [],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
 
         $memoryPoint = MemoryPointBuilder::create()
             ->setContent($expected['content'])
@@ -259,9 +259,9 @@ class MemoryEndpointTest extends BaseTest
             'vector' => [],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
 
         $memoryPoint = MemoryPointBuilder::create()
             ->setContent($expected['content'])
@@ -282,9 +282,9 @@ class MemoryEndpointTest extends BaseTest
             'deleted' => 'test',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->deleteMemoryPoint(Collection::Declarative, $expected['deleted']);
 
         self::assertEquals($expected['deleted'], $result->deleted);
@@ -307,13 +307,13 @@ class MemoryEndpointTest extends BaseTest
             'deleted' => ['operation_id' => 21212414, 'status' => 'ok'],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->deleteMemoryPointsByMetadata(Collection::Declarative, $metadata);
 
         foreach ($expected['deleted'] as $key => $value) {
-            self::assertEquals($value, $result->deleted->{CcatUtility::camelCase($key)});
+            self::assertEquals($value, $result->deleted->{CheshireCatUtility::camelCase($key)});
         }
     }
 
@@ -330,9 +330,9 @@ class MemoryEndpointTest extends BaseTest
             'next_offset' => 0,
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->memory();
+        $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->getMemoryPoints(Collection::Declarative);
 
         self::assertInstanceOf(MemoryPointsOutput::class, $result);

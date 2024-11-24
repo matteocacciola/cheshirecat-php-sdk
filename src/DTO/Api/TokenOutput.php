@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api;
+namespace DataMat\CheshireCat\DTO\Api;
 
 class TokenOutput
 {

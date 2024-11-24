@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
@@ -33,9 +33,9 @@ class EmbedderEndpointTest extends TestCase
             'selected_configuration' => 'testEmbedder',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->embedder();
+        $endpoint = $cheshireCatClient->embedder();
         $result = $endpoint->getEmbeddersSettings();
 
         foreach ($expected['settings'] as $key => $setting) {
@@ -67,9 +67,9 @@ class EmbedderEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->embedder();
+        $endpoint = $cheshireCatClient->embedder();
         $result = $endpoint->getEmbedderSettings('testEmbedder');
 
         self::assertEquals($expected['name'], $result->name);
@@ -94,9 +94,9 @@ class EmbedderEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->embedder();
+        $endpoint = $cheshireCatClient->embedder();
         $result = $endpoint->putEmbedderSettings('testEmbedder', $expected['value']);
 
         self::assertEquals($expected['name'], $result->name);

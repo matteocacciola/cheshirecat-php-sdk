@@ -1,11 +1,11 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests\Traits;
+namespace DataMat\CheshireCat\Tests\Traits;
 
-use Albocode\CcatphpSdk\CCatClient;
-use Albocode\CcatphpSdk\Clients\HttpClient as BaseHttpClient;
-use Albocode\CcatphpSdk\Tests\Mocks\TestHttpClient;
-use Albocode\CcatphpSdk\Tests\Mocks\TestWsClient;
+use DataMat\CheshireCat\CheshireCatClient;
+use DataMat\CheshireCat\Clients\HttpClient as BaseHttpClient;
+use DataMat\CheshireCat\Tests\Mocks\TestHttpClient;
+use DataMat\CheshireCat\Tests\Mocks\TestWsClient;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -24,15 +24,15 @@ trait TestTrait
     /**
      * @throws \JsonException|Exception
      */
-    protected function getCCatClient(
+    protected function getCheshireCatClient(
         ?string $apikey = null,
         ?array $content = null,
         ?int $code = null
-    ): CCatClient {
+    ): CheshireCatClient {
         $httpClient = $this->getHttpClient($apikey, $content, $code);
         $wsClient = $this->getWsClient($apikey, $content);
 
-        return new CCatClient($wsClient, $httpClient);
+        return new CheshireCatClient($wsClient, $httpClient);
     }
 
     /**

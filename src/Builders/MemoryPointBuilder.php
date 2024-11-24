@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Builders;
+namespace DataMat\CheshireCat\Builders;
 
-use Albocode\CcatphpSdk\DTO\MemoryPoint;
+use DataMat\CheshireCat\DTO\MemoryPoint;
 
 class MemoryPointBuilder implements BaseBuilder
 {

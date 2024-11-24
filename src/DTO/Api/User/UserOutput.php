@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\User;
+namespace DataMat\CheshireCat\DTO\Api\User;
 
 class UserOutput
 {

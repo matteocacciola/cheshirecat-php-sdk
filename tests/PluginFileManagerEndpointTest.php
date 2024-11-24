@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
@@ -33,9 +33,9 @@ class PluginFileManagerEndpointTest extends TestCase
             'selected_configuration' => 'testPluginFileManager',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->pluginFileManager();
+        $endpoint = $cheshireCatClient->pluginFileManager();
         $result = $endpoint->getPluginFileManagersSettings();
 
         foreach ($expected['settings'] as $key => $setting) {
@@ -67,9 +67,9 @@ class PluginFileManagerEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->pluginFileManager();
+        $endpoint = $cheshireCatClient->pluginFileManager();
         $result = $endpoint->getPluginFileManagerSettings('testPluginFileManager');
 
         self::assertEquals($expected['name'], $result->name);
@@ -94,9 +94,9 @@ class PluginFileManagerEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->pluginFileManager();
+        $endpoint = $cheshireCatClient->pluginFileManager();
         $result = $endpoint->putPluginFileManagerSettings('testPluginFileManager', $expected['value']);
 
         self::assertEquals($expected['name'], $result->name);

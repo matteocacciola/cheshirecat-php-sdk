@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\DTO\Api\Plugin\Settings;
+namespace DataMat\CheshireCat\DTO\Api\Plugin\Settings;
 
 class PluginSchemaSettings
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\DTO\Api\Plugin\PluginsSettingsOutput;
-use Albocode\CcatphpSdk\DTO\Api\Plugin\Settings\PluginSettingsOutput;
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginsSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\Settings\PluginSettingsOutput;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
@@ -24,21 +24,21 @@ class AdminsEndpointTest extends TestCase
             'token_type' => 'bearer',
         ];
 
-        $cCatClient = $this->getCCatClient(null, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient(null, $expected);
         try {
-            $cCatClient->getHttpClient()->getClient();
+            $cheshireCatClient->getHttpClient()->getClient();
         } catch (\Exception $e) {
             self::assertInstanceOf(\InvalidArgumentException::class, $e);
             self::assertEquals('You must provide an apikey or a token', $e->getMessage());
         }
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->token('test-user', 'test-pass');
 
         self::assertEquals($expected['access_token'], $result->accessToken);
         self::assertEquals($expected['token_type'], $result->tokenType);
 
-        $httpClient = $cCatClient->getHttpClient()->getClient();
+        $httpClient = $cheshireCatClient->getHttpClient()->getClient();
 
         self::assertInstanceOf(Client::class, $httpClient);
     }
@@ -57,9 +57,9 @@ class AdminsEndpointTest extends TestCase
             'id' => 'id',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->postAdmin($expected['username'], $expected['password'], $expected['permissions']);
 
         self::assertEquals($expected['username'], $result->username);
@@ -82,9 +82,9 @@ class AdminsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->getAdmins();
 
         self::assertCount(1, $result);
@@ -106,9 +106,9 @@ class AdminsEndpointTest extends TestCase
             'id' => 'id',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->getAdmin($expected['id']);
 
         self::assertEquals($expected['username'], $result->username);
@@ -130,9 +130,9 @@ class AdminsEndpointTest extends TestCase
             'id' => 'id',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->putAdmin(
             $expected['id'], $expected['username'], $expected['password'], $expected['permissions']
         );
@@ -155,9 +155,9 @@ class AdminsEndpointTest extends TestCase
             'id' => 'id',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->deleteAdmin($expected['id']);
 
         self::assertEquals($expected['username'], $result->username);
@@ -176,9 +176,9 @@ class AdminsEndpointTest extends TestCase
             'deleted_plugin_folders' => true,
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->postFactoryReset();
 
         self::assertTrue($result->deletedSettings);
@@ -196,9 +196,9 @@ class AdminsEndpointTest extends TestCase
             'deleted_memories' => true,
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->postAgentReset();
 
         self::assertTrue($result->deletedSettings);
@@ -215,9 +215,9 @@ class AdminsEndpointTest extends TestCase
             'deleted_memories' => true,
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->postAgentDestroy();
 
         self::assertTrue($result->deletedSettings);
@@ -233,9 +233,9 @@ class AdminsEndpointTest extends TestCase
             'created' => true,
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->postAgentCreate();
 
         self::assertTrue($result->created);
@@ -308,9 +308,9 @@ class AdminsEndpointTest extends TestCase
             ]
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->getAvailablePlugins();
 
         self::assertEquals($expected, $result->toArray());
@@ -326,9 +326,9 @@ class AdminsEndpointTest extends TestCase
             'content_type' => 'application/zip',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->postInstallPluginFromZip($expected['filename']);
 
         self::assertEquals($expected['filename'], $result->filename);
@@ -346,9 +346,9 @@ class AdminsEndpointTest extends TestCase
             'info' => 'Plugin is being installed asynchronously',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->postInstallPluginFromRegistry($url);
 
         self::assertEquals($expected['url'], $result->url);
@@ -401,9 +401,9 @@ class AdminsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->getPluginsSettings();
 
         self::assertInstanceOf(PluginsSettingsOutput::class, $result);
@@ -433,9 +433,9 @@ class AdminsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->getPluginSettings($expected['name']);
 
         self::assertInstanceOf(PluginSettingsOutput::class, $result);
@@ -462,9 +462,9 @@ class AdminsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->getPluginDetails('setting1');
 
         self::assertEquals($expected['data'], $result->data);
@@ -479,9 +479,9 @@ class AdminsEndpointTest extends TestCase
             'deleted' => 'setting_1',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->admins();
+        $endpoint = $cheshireCatClient->admins();
         $result = $endpoint->deletePlugin('setting1');
 
         self::assertEquals($expected['deleted'], $result->deleted);

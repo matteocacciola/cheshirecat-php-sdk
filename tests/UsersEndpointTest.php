@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
@@ -22,21 +22,21 @@ class UsersEndpointTest extends TestCase
             'token_type' => 'bearer',
         ];
 
-        $cCatClient = $this->getCCatClient(null, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient(null, $expected);
         try {
-            $cCatClient->getHttpClient()->getClient();
+            $cheshireCatClient->getHttpClient()->getClient();
         } catch (\Exception $e) {
             self::assertInstanceOf(\InvalidArgumentException::class, $e);
             self::assertEquals('You must provide an apikey or a token', $e->getMessage());
         }
 
-        $endpoint = $cCatClient->users();
+        $endpoint = $cheshireCatClient->users();
         $result = $endpoint->token('test-user', 'test-pass');
 
         self::assertEquals($expected['access_token'], $result->accessToken);
         self::assertEquals($expected['token_type'], $result->tokenType);
 
-        $httpClient = $cCatClient->getHttpClient()->getClient();
+        $httpClient = $cheshireCatClient->getHttpClient()->getClient();
 
         self::assertInstanceOf(Client::class, $httpClient);
     }
@@ -55,9 +55,9 @@ class UsersEndpointTest extends TestCase
             'id' => 'id',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->users();
+        $endpoint = $cheshireCatClient->users();
         $result = $endpoint->postUser($expected['username'], $expected['password'], $expected['permissions']);
 
         self::assertEquals($expected['username'], $result->username);
@@ -80,9 +80,9 @@ class UsersEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->users();
+        $endpoint = $cheshireCatClient->users();
         $result = $endpoint->getUsers();
 
         self::assertCount(1, $result);
@@ -104,9 +104,9 @@ class UsersEndpointTest extends TestCase
             'id' => 'id',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->users();
+        $endpoint = $cheshireCatClient->users();
         $result = $endpoint->getUser($expected['id']);
 
         self::assertEquals($expected['username'], $result->username);
@@ -128,9 +128,9 @@ class UsersEndpointTest extends TestCase
             'id' => 'id',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->users();
+        $endpoint = $cheshireCatClient->users();
         $result = $endpoint->putUser(
             $expected['id'], $expected['username'], $expected['password'], $expected['permissions']
         );
@@ -153,9 +153,9 @@ class UsersEndpointTest extends TestCase
             'id' => 'id',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->users();
+        $endpoint = $cheshireCatClient->users();
         $result = $endpoint->deleteUser($expected['id']);
 
         self::assertEquals($expected['username'], $result->username);
@@ -175,9 +175,9 @@ class UsersEndpointTest extends TestCase
             "STATIC" => ["READ"],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->users();
+        $endpoint = $cheshireCatClient->users();
         $result = $endpoint->getAvailablePermissions();
 
         self::assertEquals($expected, $result);

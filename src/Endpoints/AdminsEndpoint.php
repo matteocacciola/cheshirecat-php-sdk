@@ -1,18 +1,18 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Endpoints;
+namespace DataMat\CheshireCat\Endpoints;
 
-use Albocode\CcatphpSdk\DTO\Api\Admins\AdminOutput;
-use Albocode\CcatphpSdk\DTO\Api\Admins\CreatedOutput;
-use Albocode\CcatphpSdk\DTO\Api\Admins\PluginDeleteOutput;
-use Albocode\CcatphpSdk\DTO\Api\Admins\PluginDetailsOutput;
-use Albocode\CcatphpSdk\DTO\Api\Admins\PluginInstallFromRegistryOutput;
-use Albocode\CcatphpSdk\DTO\Api\Admins\PluginInstallOutput;
-use Albocode\CcatphpSdk\DTO\Api\Admins\ResetOutput;
-use Albocode\CcatphpSdk\DTO\Api\Plugin\PluginCollectionOutput;
-use Albocode\CcatphpSdk\DTO\Api\Plugin\PluginsSettingsOutput;
-use Albocode\CcatphpSdk\DTO\Api\Plugin\Settings\PluginSettingsOutput;
-use Albocode\CcatphpSdk\DTO\Api\TokenOutput;
+use DataMat\CheshireCat\DTO\Api\Admins\AdminOutput;
+use DataMat\CheshireCat\DTO\Api\Admins\CreatedOutput;
+use DataMat\CheshireCat\DTO\Api\Admins\PluginDeleteOutput;
+use DataMat\CheshireCat\DTO\Api\Admins\PluginDetailsOutput;
+use DataMat\CheshireCat\DTO\Api\Admins\PluginInstallFromRegistryOutput;
+use DataMat\CheshireCat\DTO\Api\Admins\PluginInstallOutput;
+use DataMat\CheshireCat\DTO\Api\Admins\ResetOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginCollectionOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginsSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\Settings\PluginSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\TokenOutput;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Utils;
 

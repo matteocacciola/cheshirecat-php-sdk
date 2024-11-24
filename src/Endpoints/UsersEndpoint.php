@@ -1,9 +1,9 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Endpoints;
+namespace DataMat\CheshireCat\Endpoints;
 
-use Albocode\CcatphpSdk\DTO\Api\TokenOutput;
-use Albocode\CcatphpSdk\DTO\Api\User\UserOutput;
+use DataMat\CheshireCat\DTO\Api\TokenOutput;
+use DataMat\CheshireCat\DTO\Api\User\UserOutput;
 use GuzzleHttp\Exception\GuzzleException;
 
 class UsersEndpoint extends AbstractEndpoint

@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests\Mocks;
+namespace DataMat\CheshireCat\Tests\Mocks;
 
-use Albocode\CcatphpSdk\Clients\WSClient;
+use DataMat\CheshireCat\Clients\WSClient;
 use WebSocket\Client;
 
 class TestWsClient extends WSClient

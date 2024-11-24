@@ -1,8 +1,8 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests\Mocks;
+namespace DataMat\CheshireCat\Tests\Mocks;
 
-use Albocode\CcatphpSdk\Clients\HttpClient;
+use DataMat\CheshireCat\Clients\HttpClient;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 

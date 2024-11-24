@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Clients;
+namespace DataMat\CheshireCat\Clients;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Clients;
+namespace DataMat\CheshireCat\Clients;
 
 use Phrity\Net\Uri;
 use WebSocket\Client;

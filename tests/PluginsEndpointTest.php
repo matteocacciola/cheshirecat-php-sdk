@@ -1,10 +1,10 @@
 <?php
 
-namespace Albocode\CcatphpSdk\Tests;
+namespace DataMat\CheshireCat\Tests;
 
-use Albocode\CcatphpSdk\DTO\Api\Plugin\PluginsSettingsOutput;
-use Albocode\CcatphpSdk\DTO\Api\Plugin\Settings\PluginSettingsOutput;
-use Albocode\CcatphpSdk\Tests\Traits\TestTrait;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginsSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\Settings\PluginSettingsOutput;
+use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
@@ -80,9 +80,9 @@ class PluginsEndpointTest extends TestCase
             ]
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->plugins();
+        $endpoint = $cheshireCatClient->plugins();
         $result = $endpoint->getAvailablePlugins();
 
         self::assertEquals($expected, $result->toArray());
@@ -129,9 +129,9 @@ class PluginsEndpointTest extends TestCase
             ]
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->plugins();
+        $endpoint = $cheshireCatClient->plugins();
         $result = $endpoint->getAvailablePlugins('Plugin 1');
 
         self::assertEquals($expected, $result->toArray());
@@ -147,9 +147,9 @@ class PluginsEndpointTest extends TestCase
             'info' => 'Plugin plugin_1 toggled',
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->plugins();
+        $endpoint = $cheshireCatClient->plugins();
         $result = $endpoint->putTogglePlugin($pluginId);
 
         self::assertEquals($expected['info'], $result->info);
@@ -201,9 +201,9 @@ class PluginsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->plugins();
+        $endpoint = $cheshireCatClient->plugins();
         $result = $endpoint->getPluginsSettings();
 
         self::assertInstanceOf(PluginsSettingsOutput::class, $result);
@@ -233,9 +233,9 @@ class PluginsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->plugins();
+        $endpoint = $cheshireCatClient->plugins();
         $result = $endpoint->getPluginSettings($expected['name']);
 
         self::assertInstanceOf(PluginSettingsOutput::class, $result);
@@ -254,9 +254,9 @@ class PluginsEndpointTest extends TestCase
             ],
         ];
 
-        $cCatClient = $this->getCCatClient($this->apikey, $expected);
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cCatClient->plugins();
+        $endpoint = $cheshireCatClient->plugins();
         $result = $endpoint->putPluginSettings(
             $expected['name'], ['setting_a' => 'some value', 'setting_b' => 'another value']
         );
