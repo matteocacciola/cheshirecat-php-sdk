@@ -16,6 +16,8 @@ class RabbitHoleEndpoint extends AbstractEndpoint
      * the RAG system. The file is then processed by the RAG system and the results are stored in the RAG database.
      * The process is asynchronous and the results are returned in a batch.
      * The CheshireCat processes the injection in background and the client will be informed at the end of the process.
+     *
+     * @throws \JsonException
      */
     public function postFile(
         string $filePath,
@@ -23,6 +25,7 @@ class RabbitHoleEndpoint extends AbstractEndpoint
         ?int $chunkSize = null,
         ?int $chunkOverlap = null,
         ?string $agentId = null,
+        ?array $metadata = null,
     ): PromiseInterface {
         $fileName = $fileName ?: basename($filePath);
 
@@ -48,6 +51,13 @@ class RabbitHoleEndpoint extends AbstractEndpoint
             ];
         }
 
+        if ($metadata) {
+            $multipartData[] = [
+                'name' => 'metadata',
+                'contents' => json_encode($metadata, JSON_THROW_ON_ERROR),
+            ];
+        }
+
         return $this->getHttpClient($agentId)->postAsync($this->prefix, ['multipart' => $multipartData]);
     }
 
@@ -58,12 +68,15 @@ class RabbitHoleEndpoint extends AbstractEndpoint
      * The CheshireCat processes the injection in background and the client will be informed at the end of the process.
      *
      * @param string[] $filePaths
+     *
+     * @throws \JsonException
      */
     public function postFiles(
         array $filePaths,
         ?int $chunkSize = null,
         ?int $chunkOverlap = null,
         ?string $agentId = null,
+        array $metadata = [],
     ): PromiseInterface {
         $multipartData = [];
 
@@ -89,6 +102,11 @@ class RabbitHoleEndpoint extends AbstractEndpoint
             ];
         }
 
+        $multipartData[] = [
+            'name' => 'metadata',
+            'contents' => json_encode($metadata, JSON_THROW_ON_ERROR)
+        ];
+
         return $this->getHttpClient($agentId)->postAsync($this->formatUrl('/batch'), [
             'multipart' => $multipartData,
         ]);
@@ -99,6 +117,8 @@ class RabbitHoleEndpoint extends AbstractEndpoint
      * processed by the RAG system by Web scraping and the results are stored in the RAG database. The process is
      * asynchronous.
      * The CheshireCat processes the injection in background and the client will be informed at the end of the process.
+     *
+     * @throws \JsonException
      */
     public function postWeb(
         string $webUrl,
