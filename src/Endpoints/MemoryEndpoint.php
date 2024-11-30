@@ -165,7 +165,7 @@ class MemoryEndpoint extends AbstractEndpoint
      *
      * @param array<string, mixed>|null $metadata
      *
-     * @throws GuzzleException
+     * @throws GuzzleException|\JsonException
      */
     public function getMemoryRecall(
         string $text,
@@ -179,7 +179,7 @@ class MemoryEndpoint extends AbstractEndpoint
             $query['k'] = $k;
         }
         if ($metadata) {
-            $query['metadata'] = $metadata;
+            $query['metadata'] = json_encode($metadata, JSON_THROW_ON_ERROR);
         }
 
         return $this->get(
