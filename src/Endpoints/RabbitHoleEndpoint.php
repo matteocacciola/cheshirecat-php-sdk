@@ -76,7 +76,7 @@ class RabbitHoleEndpoint extends AbstractEndpoint
         ?int $chunkSize = null,
         ?int $chunkOverlap = null,
         ?string $agentId = null,
-        array $metadata = [],
+        ?array $metadata = null,
     ): PromiseInterface {
         $multipartData = [];
 
@@ -102,10 +102,12 @@ class RabbitHoleEndpoint extends AbstractEndpoint
             ];
         }
 
-        $multipartData[] = [
-            'name' => 'metadata',
-            'contents' => json_encode($metadata, JSON_THROW_ON_ERROR)
-        ];
+        if ($metadata) {
+            $multipartData[] = [
+                'name' => 'metadata',
+                'contents' => json_encode($metadata, JSON_THROW_ON_ERROR)
+            ];
+        }
 
         return $this->getHttpClient($agentId)->postAsync($this->formatUrl('/batch'), [
             'multipart' => $multipartData,
@@ -125,6 +127,7 @@ class RabbitHoleEndpoint extends AbstractEndpoint
         ?int $chunkSize = null,
         ?int $chunkOverlap = null,
         ?string $agentId = null,
+        ?array $metadata = null,
     ): PromiseInterface {
         $payload = ['url' => $webUrl];
         if ($chunkSize) {
@@ -132,6 +135,9 @@ class RabbitHoleEndpoint extends AbstractEndpoint
         }
         if ($chunkOverlap) {
             $payload['chunk_overlap'] = $chunkOverlap;
+        }
+        if ($metadata) {
+            $payload['metadata'] = $metadata;
         }
 
         return $this->getHttpClient($agentId)->postAsync($this->formatUrl('/web'), [
