@@ -7,19 +7,19 @@ use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 
-class PluginFileManagerEndpointTest extends TestCase
+class FileManagerEndpointTest extends TestCase
 {
     use TestTrait;
 
     /**
      * @throws GuzzleException|\JsonException|Exception
      */
-    public function testGetPluginFileManagersSettingsSuccess(): void
+    public function testGetFileManagersSettingsSuccess(): void
     {
         $expected = [
             'settings' => [
                 [
-                    'name' => 'testPluginFileManager',
+                    'name' => 'testFileManager',
                     'value' => [
                         'property_first' => 'value_first',
                         'property_second' => 'value_second',
@@ -30,13 +30,13 @@ class PluginFileManagerEndpointTest extends TestCase
                     ],
                 ],
             ],
-            'selected_configuration' => 'testPluginFileManager',
+            'selected_configuration' => 'testFileManager',
         ];
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cheshireCatClient->pluginFileManager();
-        $result = $endpoint->getPluginFileManagersSettings();
+        $endpoint = $cheshireCatClient->fileManager();
+        $result = $endpoint->getFileManagersSettings();
 
         foreach ($expected['settings'] as $key => $setting) {
             self::assertEquals($setting['name'], $result->settings[$key]->name);
@@ -53,10 +53,10 @@ class PluginFileManagerEndpointTest extends TestCase
     /**
      * @throws GuzzleException|\JsonException|Exception
      */
-    public function testGetPluginFileManagerSettingsSuccess(): void
+    public function testGetFileManagerSettingsSuccess(): void
     {
         $expected = [
-            'name' => 'testPluginFileManager',
+            'name' => 'testFileManager',
             'value' => [
                 'property_first' => 'value_first',
                 'property_second' => 'value_second',
@@ -69,8 +69,8 @@ class PluginFileManagerEndpointTest extends TestCase
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cheshireCatClient->pluginFileManager();
-        $result = $endpoint->getPluginFileManagerSettings('testPluginFileManager');
+        $endpoint = $cheshireCatClient->fileManager();
+        $result = $endpoint->getFileManagerSettings('testFileManager');
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {
@@ -84,10 +84,10 @@ class PluginFileManagerEndpointTest extends TestCase
     /**
      * @throws GuzzleException|\JsonException|Exception
      */
-    public function testPutPluginFileManagerSettingsSuccess(): void
+    public function testPutFileManagerSettingsSuccess(): void
     {
         $expected = [
-            'name' => 'testPluginFileManager',
+            'name' => 'testFileManager',
             'value' => [
                 'property_first' => 'value_first',
                 'property_second' => 'value_second',
@@ -96,8 +96,8 @@ class PluginFileManagerEndpointTest extends TestCase
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cheshireCatClient->pluginFileManager();
-        $result = $endpoint->putPluginFileManagerSettings('testPluginFileManager', $expected['value']);
+        $endpoint = $cheshireCatClient->fileManager();
+        $result = $endpoint->putFileManagerSettings('testFileManager', $expected['value']);
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {

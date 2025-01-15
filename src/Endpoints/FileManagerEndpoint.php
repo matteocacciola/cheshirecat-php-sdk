@@ -4,12 +4,11 @@ namespace DataMat\CheshireCat\Endpoints;
 
 use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingOutput;
 use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingsOutput;
-use DataMat\CheshireCat\DTO\SettingInput;
 use GuzzleHttp\Exception\GuzzleException;
 
-class PluginFileManagerEndpoint extends AbstractEndpoint
+class FileManagerEndpoint extends AbstractEndpoint
 {
-    protected string $prefix = '/plugin_filemanager';
+    protected string $prefix = '/file_manager';
 
     /**
      * This endpoint returns the settings of all plugin file managers. Plugin file managers are set to a system level,
@@ -17,7 +16,7 @@ class PluginFileManagerEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException
      */
-    public function getPluginFileManagersSettings(): FactoryObjectSettingsOutput
+    public function getFileManagersSettings(): FactoryObjectSettingsOutput
     {
         return $this->get(
             $this->formatUrl('/settings'),
@@ -32,10 +31,10 @@ class PluginFileManagerEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException
      */
-    public function getPluginFileManagerSettings(string $pluginFileManager): FactoryObjectSettingOutput
+    public function getFileManagerSettings(string $fileManager): FactoryObjectSettingOutput
     {
         return $this->get(
-            $this->formatUrl('/settings/' . $pluginFileManager),
+            $this->formatUrl('/settings/' . $fileManager),
             FactoryObjectSettingOutput::class,
             $this->systemId,
         );
@@ -49,10 +48,10 @@ class PluginFileManagerEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException
      */
-    public function putPluginFileManagerSettings(string $pluginFileManager, array $values): FactoryObjectSettingOutput
+    public function putFileManagerSettings(string $fileManager, array $values): FactoryObjectSettingOutput
     {
         return $this->put(
-            $this->formatUrl('/settings/' . $pluginFileManager),
+            $this->formatUrl('/settings/' . $fileManager),
             FactoryObjectSettingOutput::class,
             $values,
             $this->systemId,
