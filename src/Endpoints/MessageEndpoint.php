@@ -38,11 +38,11 @@ class MessageEndpoint extends AbstractEndpoint
         ?string $userId = null,
         ?Closure $closure = null
     ): MessageOutput {
-        $client = $this->getWsClient($agentId, $userId);
         $json = json_encode($message->toArray(), JSON_THROW_ON_ERROR);
         if (!$json) {
             throw new RuntimeException('Error encode message');
         }
+        $client = $this->getWsClient($agentId, $userId);
         $client->text($json);
 
         while (true) {
