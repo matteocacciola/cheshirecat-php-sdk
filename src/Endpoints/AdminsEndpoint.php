@@ -163,6 +163,22 @@ class AdminsEndpoint extends AbstractEndpoint
     }
 
     /**
+     * This endpoint is used to retrieve all the agents in the system.
+     *
+     * @return string[]
+     *
+     * @throws GuzzleException
+     */
+    public function getAgents(): array
+    {
+        return $this->get(
+            $this->formatUrl('/utils/agents/'),
+            null,
+            $this->systemId,
+        );
+    }
+
+    /**
      * This endpoint is used to create a new agent from scratch.
      *
      * @throws GuzzleException

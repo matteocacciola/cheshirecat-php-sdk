@@ -52,7 +52,7 @@ abstract class AbstractEndpoint
      */
     protected function get(
         string $endpoint,
-        string $outputClass,
+        ?string $outputClass = null,
         ?string $agentId = null,
         ?string $userId = null,
         ?array $query = null,
@@ -63,6 +63,10 @@ abstract class AbstractEndpoint
         }
 
         $response = $this->getHttpClient($agentId, $userId)->get($endpoint, $options);
+
+        if ($outputClass === null) {
+            return $response->getBody()->getContents();
+        }
 
         return $this->deserialize($response->getBody()->getContents(), $outputClass);
     }
