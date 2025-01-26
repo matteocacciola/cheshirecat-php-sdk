@@ -18,25 +18,16 @@ class Why
     #[SerializedName('model_interactions')]
     public ?array $modelInteractions = [];
 
-    #[SerializedName('agent_output')]
-    public ?AgentOutput $agentOutput = null;
-
     /**
      * @return array<string, mixed>
      */
     public function toArray(): array
     {
-        $result = [
+        return [
             'input' => $this->input,
             'intermediate_steps' => $this->intermediateSteps,
             'memory' => $this->memory->toArray(),
             'model_interactions' => $this->modelInteractions,
         ];
-
-        if ($this->agentOutput !== null) {
-            $result['agent_output'] = $this->agentOutput->toArray();
-        }
-
-        return $result;
     }
 }
