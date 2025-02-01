@@ -247,7 +247,7 @@ class MemoryEndpoint extends AbstractEndpoint
     }
 
     /**
-     * This endpoint retrieves a memory point, either for the agent identified by the agentId parameter (for multi-agent
+     * This endpoint deletes a memory point, either for the agent identified by the agentId parameter (for multi-agent
      * installations) or for the default agent (for single-agent installations).
      *
      * @throws GuzzleException
@@ -265,7 +265,7 @@ class MemoryEndpoint extends AbstractEndpoint
     }
 
     /**
-     * This endpoint retrieves memory points based on the metadata, either for the agent identified by the agentId
+     * This endpoint deletes memory points based on the metadata, either for the agent identified by the agentId
      * parameter (for multi-agent installations) or for the default agent (for single-agent installations). The metadata
      * parameter is a dictionary of key-value pairs that the memory points must match.
      *

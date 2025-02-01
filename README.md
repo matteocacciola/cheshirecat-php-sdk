@@ -15,18 +15,6 @@ To install CheshireCat PHP SDK you can run this command:
 composer require matteocacciola/cheshirecat-php-sdk
 ```
 
-Perhaps, you also need to add the following repositories to your composer.json file:
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/matteocacciola/cheshirecat-php-sdk"
-        }
-    ]
-}
-```
-
 ## Usage
 Initialization and usage:
 
@@ -44,7 +32,7 @@ Send a message to the websocket:
 
 ```php
 $notificationClosure = function (string $message) {
- // handle websocket notification, like chat token stream
+    // handle websocket notification, like chat token stream
 }
 
 // result is the result of the message
