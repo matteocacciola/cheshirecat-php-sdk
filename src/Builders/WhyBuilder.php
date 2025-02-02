@@ -2,7 +2,6 @@
 
 namespace DataMat\CheshireCat\Builders;
 
-use DataMat\CheshireCat\DTO\AgentOutput;
 use DataMat\CheshireCat\DTO\Memory;
 use DataMat\CheshireCat\DTO\Why;
 
@@ -18,8 +17,6 @@ class WhyBuilder implements BaseBuilder
     /** @var null|array<string, mixed> */
 
     private ?array $modelInteractions = [];
-
-    private ?AgentOutput $agentOutput = null;
 
     public static function create() : WhyBuilder
     {
@@ -60,13 +57,6 @@ class WhyBuilder implements BaseBuilder
         return $this;
     }
 
-    public function setAgentOutput(?AgentOutput $agentOutput = null): WhyBuilder
-    {
-        $this->agentOutput = $agentOutput;
-
-        return $this;
-    }
-
     public function build(): Why
     {
         $why = new Why();
@@ -74,7 +64,6 @@ class WhyBuilder implements BaseBuilder
         $why->intermediateSteps = $this->intermediateSteps;
         $why->memory = $this->memory;
         $why->modelInteractions = $this->modelInteractions;
-        $why->agentOutput = $this->agentOutput;
 
         return $why;
     }
