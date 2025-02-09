@@ -30,6 +30,12 @@ class PluginItemOutput
     /** @var array<int, ToolOutput> */
     public array $tools;
 
+    /** @var array<int, FormOutput> */
+    public array $forms;
+
+    /** @var array<int, EndpointOutput> */
+    public array $endpoints;
+
     /**
      * @return array<string, mixed>
      */
@@ -48,6 +54,8 @@ class PluginItemOutput
             'active' => $this->active,
             'hooks' => array_map(fn(HookOutput $item) => $item->toArray(), $this->hooks),
             'tools' => array_map(fn(ToolOutput $item) => $item->toArray(), $this->tools),
+            'forms' => array_map(fn(FormOutput $item) => $item->toArray(), $this->forms),
+            'endpoints' => array_map(fn(EndpointOutput $item) => $item->toArray(), $this->endpoints),
         ];
     }
 }

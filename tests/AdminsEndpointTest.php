@@ -263,7 +263,9 @@ class AdminsEndpointTest extends TestCase
                     'version' => '1.0.0',
                     'active' => true,
                     'hooks' => [],
-                    'tools' => []
+                    'tools' => [],
+                    'forms' => [],
+                    'endpoints' => [],
                 ],
                 [
                     'id' => '2',
@@ -277,7 +279,9 @@ class AdminsEndpointTest extends TestCase
                     'version' => '1.0.0',
                     'active' => true,
                     'hooks' => [],
-                    'tools' => []
+                    'tools' => [],
+                    'forms' => [],
+                    'endpoints' => [],
                 ]
             ],
             'registry' => [
