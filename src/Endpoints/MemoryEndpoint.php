@@ -116,16 +116,12 @@ class MemoryEndpoint extends AbstractEndpoint
      * parameter (for multi-agent installations) or for the default agent (for single-agent installations). If the
      * userId parameter is provided, the conversation history is added to the user ID.
      *
-     * @param array<string, mixed>|null $images
-     * @param array<string, mixed>|null $audio
-     *
      * @throws GuzzleException
      */
     public function postConversationHistory(
         Role $who,
         string $text,
-        ?array $images = null,
-        ?array $audio = null,
+        ?string $image = null,
         ?Why $why = null,
         ?string $agentId = null,
         ?string $userId = null
@@ -134,11 +130,8 @@ class MemoryEndpoint extends AbstractEndpoint
             'who' => $who->value,
             'text' => $text,
         ];
-        if ($images) {
-            $payload['images'] = $images;
-        }
-        if ($audio) {
-            $payload['audio'] = $audio;
+        if ($image) {
+            $payload['image'] = $image;
         }
         if ($why) {
             $payload['why'] = $why->toArray();

@@ -16,12 +16,7 @@ class MessageOutput extends MessageBase
     /** @deprecated */
     public readonly string $content;
 
-    /**
-     * @param string $text
-     * @param array<int, string>|null $images
-     * @param array<int, string>|null $audio
-     */
-    public function __construct(public string $text = '', public ?array $images = null, public ?array $audio = null)
+    public function __construct(public string $text = '', public ?string $image = null)
     {
         $this->content = $text;
     }

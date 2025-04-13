@@ -6,11 +6,8 @@ class MessageBase
 {
     public string $text;
 
-    /** @var string[]|null  */
-    public ?array $images = [];
-
-    /** @var string[]|null  */
-    public ?array $audio = [];
+    /** @var string|null  */
+    public ?string $image = null;
 
     /**
      * @return array<string, mixed>
@@ -21,12 +18,8 @@ class MessageBase
             'text' => $this->text,
         ];
 
-        if ($this->images !== null) {
-            $result['images'] = $this->images;
-        }
-
-        if ($this->audio !== null) {
-            $result['audio'] = $this->audio;
+        if ($this->image !== null) {
+            $result['image'] = $this->image;
         }
 
         return $result;

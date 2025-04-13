@@ -9,11 +9,7 @@ class ConversationHistoryItemContent extends MessageBase
 {
     public string $text;
 
-    /** @var string[]|null  */
-    public ?array $images = [];
-
-    /** @var string[]|null  */
-    public ?array $audio = [];
+    public ?string $image = null;
 
     /** @var Why|null */
     public ?Why $why = null;

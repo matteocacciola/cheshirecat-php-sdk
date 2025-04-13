@@ -10,19 +10,15 @@ class Message extends MessageBase
     public ?array $additionalFields;
 
     /**
-     * @param string[]|null $images
-     * @param string[]|null $audio
      * @param array<string, mixed>|null $additionalFields
      */
     public function __construct(
         string $text,
-        ?array $images = null,
-        ?array $audio = null,
+        ?string $image = null,
         ?array $additionalFields = null
     ) {
         $this->text = $text;
-        $this->images = $images;
-        $this->audio = $audio;
+        $this->image = $image;
         $this->additionalFields = $additionalFields;
     }
 
@@ -33,8 +29,7 @@ class Message extends MessageBase
     {
         $result = [
             'text' => $this->text,
-            'images' => $this->images,
-            'audio' => $this->audio,
+            'image' => $this->image,
         ];
 
         if ($this->additionalFields !== null) {
