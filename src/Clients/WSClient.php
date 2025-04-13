@@ -9,6 +9,7 @@ use WebSocket\Middleware\PingResponder;
 
 class WSClient
 {
+    protected ?Client $wsClient;
     protected string $host;
     protected ?int $port;
     protected ?string $apikey;
@@ -41,7 +42,11 @@ class WSClient
             throw new \InvalidArgumentException('You must provide an apikey or a token');
         }
 
-        return $this->createWsClient($agentId, $userId);
+        if (!$this->wsClient) {
+            $this->wsClient = $this->createWsClient($agentId, $userId);
+        }
+
+        return $this->wsClient;
     }
 
     public function getWsUri(?string $agentId = null, ?string $userId = null): Uri
