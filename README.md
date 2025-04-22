@@ -46,11 +46,11 @@ $result = $cheshireCatClient->message()->sendWebsocketMessage(
 Load data to the rabbit hole:
 ```php
 //file
-$promise = $cheshireCatClient->rabbitHole()->postFile($uploadedFile->getPathname(), null, null);
+$promise = $cheshireCatClient->rabbitHole()->postFile($uploadedFile->getPathname());
 $promise->wait();
 
 //url
-$promise = $cheshireCatClient->rabbitHole()->postWeb($url, null,null);
+$promise = $cheshireCatClient->rabbitHole()->postWeb($url);
 $promise->wait();
 ```
 
