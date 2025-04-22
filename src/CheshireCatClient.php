@@ -19,6 +19,7 @@ use Symfony\Component\Serializer\Serializer;
 /**
  * @method \DataMat\CheshireCat\Endpoints\AdminsEndpoint admins()
  * @method \DataMat\CheshireCat\Endpoints\AuthHandlerEndpoint authHandler()
+ * @method \DataMat\CheshireCat\Endpoints\ChunkerEndpoint chunker()
  * @method \DataMat\CheshireCat\Endpoints\EmbedderEndpoint embedder()
  * @method \DataMat\CheshireCat\Endpoints\FileManagerEndpoint fileManager()
  * @method \DataMat\CheshireCat\Endpoints\LargeLanguageModelEndpoint largeLanguageModel()
