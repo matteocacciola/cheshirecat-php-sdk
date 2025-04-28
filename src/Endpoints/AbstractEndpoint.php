@@ -127,7 +127,12 @@ abstract class AbstractEndpoint
         ?string $agentId = null,
         ?string $userId = null,
     ): mixed {
-        $response = $this->getHttpClient($agentId, $userId)->put($endpoint, ['json' => $payload]);
+        $options = [];
+        if ($payload) {
+            $options['json'] = $payload;
+        }
+
+        $response = $this->getHttpClient($agentId, $userId)->put($endpoint, $options);
 
         return $this->deserialize($response->getBody()->getContents(), $outputClass);
     }
