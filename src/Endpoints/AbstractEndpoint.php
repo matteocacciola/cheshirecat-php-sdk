@@ -123,7 +123,7 @@ abstract class AbstractEndpoint
     protected function put(
         string $endpoint,
         string $outputClass,
-        array $payload,
+        ?array $payload = null,
         ?string $agentId = null,
         ?string $userId = null,
     ): mixed {
