@@ -4,6 +4,7 @@ namespace DataMat\CheshireCat\Endpoints;
 
 use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingOutput;
 use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\FileManager\FileManagerAttributes;
 use GuzzleHttp\Exception\GuzzleException;
 
 class FileManagerEndpoint extends AbstractEndpoint
@@ -60,5 +61,13 @@ class FileManagerEndpoint extends AbstractEndpoint
             $values,
             $agentId,
         );
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function getFileManagerAttributes(?string $agentId = null): FileManagerAttributes
+    {
+        return $this->get($this->prefix, FileManagerAttributes::class, $agentId);
     }
 }
