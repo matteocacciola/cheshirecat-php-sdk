@@ -58,7 +58,7 @@ class UsersEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->users();
-        $result = $endpoint->postUser($expected['username'], $expected['password'], $expected['permissions']);
+        $result = $endpoint->postUser('agent', $expected['username'], $expected['password'], $expected['permissions']);
 
         self::assertEquals($expected['username'], $result->username);
         self::assertEquals($expected['permissions'], $result->permissions);
@@ -107,7 +107,7 @@ class UsersEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->users();
-        $result = $endpoint->getUser($expected['id']);
+        $result = $endpoint->getUser($expected['id'], 'agent');
 
         self::assertEquals($expected['username'], $result->username);
         self::assertEquals($expected['permissions'], $result->permissions);
@@ -132,7 +132,7 @@ class UsersEndpointTest extends TestCase
 
         $endpoint = $cheshireCatClient->users();
         $result = $endpoint->putUser(
-            $expected['id'], $expected['username'], $expected['password'], $expected['permissions']
+            $expected['id'], 'agent', $expected['username'], $expected['password'], $expected['permissions']
         );
 
         self::assertEquals($expected['username'], $result->username);
@@ -156,7 +156,7 @@ class UsersEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->users();
-        $result = $endpoint->deleteUser($expected['id']);
+        $result = $endpoint->deleteUser($expected['id'], 'agent');
 
         self::assertEquals($expected['username'], $result->username);
         self::assertEquals($expected['permissions'], $result->permissions);

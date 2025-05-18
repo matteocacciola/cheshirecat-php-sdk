@@ -34,7 +34,7 @@ class BaseTest extends TestCase
         $this->expectExceptionMessage('You must provide an apikey or a token');
 
         $wsClient = $this->getWsClient();
-        $wsClient->getClient();
+        $wsClient->getClient('agent', 'user');
     }
 
     /**
@@ -45,7 +45,7 @@ class BaseTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey);
 
         self::assertInstanceOf(HttpClient::class, $cheshireCatClient->getHttpClient()->getClient());
-        self::assertInstanceOf(WsClient::class, $cheshireCatClient->getWsClient()->getClient());
+        self::assertInstanceOf(WsClient::class, $cheshireCatClient->getWsClient()->getClient('agent', 'user'));
     }
 
     /**
@@ -57,7 +57,7 @@ class BaseTest extends TestCase
         $cheshireCatClient->addToken($this->token);
 
         self::assertInstanceOf(HttpClient::class, $cheshireCatClient->getHttpClient()->getClient());
-        self::assertInstanceOf(WsClient::class, $cheshireCatClient->getWsClient()->getClient());
+        self::assertInstanceOf(WsClient::class, $cheshireCatClient->getWsClient()->getClient('agent', 'user'));
     }
 
     /**

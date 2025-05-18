@@ -36,7 +36,7 @@ class LargeLanguageModelEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->largeLanguageModel();
-        $result = $endpoint->getLargeLanguageModelsSettings();
+        $result = $endpoint->getLargeLanguageModelsSettings('agent');
 
         foreach ($expected['settings'] as $key => $setting) {
             self::assertEquals($setting['name'], $result->settings[$key]->name);
@@ -70,7 +70,7 @@ class LargeLanguageModelEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->largeLanguageModel();
-        $result = $endpoint->getLargeLanguageModelSettings('testLargeLanguageModel');
+        $result = $endpoint->getLargeLanguageModelSettings('testLargeLanguageModel', 'agent');
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {
@@ -97,7 +97,7 @@ class LargeLanguageModelEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->largeLanguageModel();
-        $result = $endpoint->putLargeLanguageModelSettings('testLargeLanguageModel', $expected['value']);
+        $result = $endpoint->putLargeLanguageModelSettings('testLargeLanguageModel', 'agent', $expected['value']);
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {

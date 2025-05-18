@@ -17,10 +17,10 @@ class WsClientTest extends TestCase
     public function testClientWithApiKey(): void
     {
         $wsClient = new WSClient('example.com', 8080, $this->apikey);
-        $guzzleUri = $wsClient->getWsUri();
+        $guzzleUri = $wsClient->getWsUri('agent', 'user');
 
         self::assertEquals(
-            'ws://example.com:8080/ws/?apikey=' . $this->apikey,
+            'ws://example.com:8080/ws/agent?user_id=user&apikey=' . $this->apikey,
             urldecode($guzzleUri->toString())
         );
     }
@@ -32,10 +32,10 @@ class WsClientTest extends TestCase
     {
         $wsClient = new WSClient('example.com', 8080, $this->apikey);
         $wsClient->setToken($this->token);
-        $guzzleUri = $wsClient->getWsUri();
+        $guzzleUri = $wsClient->getWsUri('agent', 'user');
 
         self::assertEquals(
-            'ws://example.com:8080/ws/?token=' . $this->token,
+            'ws://example.com:8080/ws/agent?user_id=user&token=' . $this->token,
             urldecode($guzzleUri->toString())
         );
     }

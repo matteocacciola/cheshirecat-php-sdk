@@ -44,7 +44,7 @@ class SettingsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->settings();
-        $result = $endpoint->getSettings();
+        $result = $endpoint->getSettings('agent');
 
         foreach ($expected['settings'] as $key => $setting) {
             self::assertEquals($setting['name'], $result->settings[$key]->name);
@@ -82,7 +82,7 @@ class SettingsEndpointTest extends TestCase
             ->build();
 
         $endpoint = $cheshireCatClient->settings();
-        $result = $endpoint->postSetting($settingInput);
+        $result = $endpoint->postSetting($settingInput, 'agent');
 
         foreach ($expected['setting'] as $property => $value) {
             $p = CheshireCatUtility::camelCase($property);
@@ -110,7 +110,7 @@ class SettingsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->settings();
-        $result = $endpoint->getSetting('123456789');
+        $result = $endpoint->getSetting('123456789', 'agent');
 
         foreach ($expected['setting'] as $property => $value) {
             $p = CheshireCatUtility::camelCase($property);
@@ -144,7 +144,7 @@ class SettingsEndpointTest extends TestCase
             ->build();
 
         $endpoint = $cheshireCatClient->settings();
-        $result = $endpoint->putSetting('234567890', $settingInput);
+        $result = $endpoint->putSetting('234567890', 'agent', $settingInput);
 
         foreach ($expected['setting'] as $property => $value) {
             $p = CheshireCatUtility::camelCase($property);
@@ -162,7 +162,7 @@ class SettingsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->settings();
-        $result = $endpoint->deleteSetting('234567890');
+        $result = $endpoint->deleteSetting('234567890', 'agent');
 
         self::assertTrue($result->deleted);
     }

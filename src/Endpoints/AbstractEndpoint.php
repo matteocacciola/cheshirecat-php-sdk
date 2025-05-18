@@ -29,7 +29,7 @@ abstract class AbstractEndpoint
         return $this->client->getHttpClient()->getClient($agentId, $userId);
     }
 
-    protected function getWsClient(?string $agentId = null, ?string $userId = null): WebSocketClient
+    protected function getWsClient(string $agentId, string $userId): WebSocketClient
     {
         return $this->client->getWsClient()->getClient($agentId, $userId);
     }
@@ -52,8 +52,8 @@ abstract class AbstractEndpoint
      */
     protected function get(
         string $endpoint,
+        string $agentId,
         ?string $outputClass = null,
-        ?string $agentId = null,
         ?string $userId = null,
         ?array $query = null,
     ): mixed {
@@ -78,9 +78,9 @@ abstract class AbstractEndpoint
      */
     protected function postJson(
         string $endpoint,
+        string $agentId,
         string $outputClass,
         ?array $payload = null,
-        ?string $agentId = null,
         ?string $userId = null,
     ): mixed {
         $options = [];
@@ -100,9 +100,9 @@ abstract class AbstractEndpoint
      */
     protected function postMultipart(
         string $endpoint,
+        string $agentId,
         string $outputClass,
         ?array $payload = null,
-        ?string $agentId = null,
         ?string $userId = null,
     ): mixed {
         $options = [];
@@ -122,9 +122,9 @@ abstract class AbstractEndpoint
      */
     protected function put(
         string $endpoint,
+        string $agentId,
         string $outputClass,
         ?array $payload = null,
-        ?string $agentId = null,
         ?string $userId = null,
     ): mixed {
         $options = [];
@@ -144,8 +144,8 @@ abstract class AbstractEndpoint
      */
     protected function delete(
         string $endpoint,
+        string $agentId,
         string $outputClass,
-        ?string $agentId = null,
         ?string $userId = null,
         ?array $payload = null,
     ): mixed {

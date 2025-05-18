@@ -13,37 +13,37 @@ class AuthHandlerEndpoint extends AbstractEndpoint
 
     /**
      * This endpoint returns the settings of all the authentication handlers. It is used to get the settings of all the
-     * authentication handlers that are available in the agent eventually specified by the agentId parameter.
+     * authentication handlers that are available in the agent specified by the agentId parameter.
      *
      * @throws GuzzleException
      */
-    public function getAuthHandlersSettings(?string $agentId = null): FactoryObjectSettingsOutput
+    public function getAuthHandlersSettings(string $agentId): FactoryObjectSettingsOutput
     {
         return $this->get(
             $this->formatUrl('/settings'),
-            FactoryObjectSettingsOutput::class,
             $agentId,
+            FactoryObjectSettingsOutput::class,
         );
     }
 
     /**
      * This endpoint returns the settings of a specific authentication handler. It is used to get the settings of a
-     * specific authentication handler that is available in the agent eventually specified by the agentId parameter.
+     * specific authentication handler that is available in the agent specified by the agentId parameter.
      *
      * @throws GuzzleException
      */
-    public function getAuthHandlerSettings(string $authHandler, ?string $agentId = null): FactoryObjectSettingOutput
+    public function getAuthHandlerSettings(string $authHandler, string $agentId): FactoryObjectSettingOutput
     {
         return $this->get(
             $this->formatUrl('/settings/' . $authHandler),
-            FactoryObjectSettingOutput::class,
             $agentId,
+            FactoryObjectSettingOutput::class,
         );
     }
 
     /**
      * This endpoint updates the settings of a specific authentication handler. It is used to update the settings of a
-     * specific authentication handler that is available in the agent eventually specified by the agentId parameter.
+     * specific authentication handler that is available in the agent specified by the agentId parameter.
      *
      * @param array<string, mixed> $values
      *
@@ -51,14 +51,14 @@ class AuthHandlerEndpoint extends AbstractEndpoint
      */
     public function putAuthHandlerSettings(
         string $authHandler,
+        string $agentId,
         array $values,
-        ?string $agentId = null
     ): FactoryObjectSettingOutput {
         return $this->put(
             $this->formatUrl('/settings/' . $authHandler),
+            $agentId,
             FactoryObjectSettingOutput::class,
             $values,
-            $agentId,
         );
     }
 }

@@ -13,83 +13,77 @@ class PluginsEndpoint extends AbstractEndpoint
     protected string $prefix = '/plugins';
 
     /**
-     * This endpoint returns the available plugins, either for the agent identified by the agentId parameter
-     * (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint returns the available plugins.
      *
      * @throws GuzzleException
      */
-    public function getAvailablePlugins(?string $pluginName = null, ?string $agentId = null): PluginCollectionOutput
+    public function getAvailablePlugins(string $agentId, ?string $pluginName = null): PluginCollectionOutput
     {
         return $this->get(
             $this->prefix,
-            PluginCollectionOutput::class,
             $agentId,
+            PluginCollectionOutput::class,
             null,
             $pluginName ? ['query' => $pluginName] : []
         );
     }
 
     /**
-     * This endpoint toggles a plugin, either for the agent identified by the agentId parameter (for multi-agent
-     * installations) or for the default agent (for single-agent installations).
+     * This endpoint toggles a plugin.
      *
      * @throws GuzzleException
      */
-    public function putTogglePlugin(string $pluginId, ?string $agentId = null): PluginToggleOutput
+    public function putTogglePlugin(string $pluginId, string $agentId): PluginToggleOutput
     {
         return $this->put(
             $this->formatUrl('/toggle/' . $pluginId),
-            PluginToggleOutput::class,
-            [],
             $agentId,
+            PluginToggleOutput::class,
         );
     }
 
     /**
-     * This endpoint retrieves the plugins settings, either for the agent identified by the agentId parameter
-     * (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint retrieves the plugins settings.
      *
      * @throws GuzzleException
      */
-    public function getPluginsSettings(?string $agentId = null): PluginsSettingsOutput
+    public function getPluginsSettings(string $agentId): PluginsSettingsOutput
     {
         return $this->get(
             $this->formatUrl('/settings'),
-            PluginsSettingsOutput::class,
             $agentId,
+            PluginsSettingsOutput::class,
         );
     }
 
     /**
-     * This endpoint retrieves the plugin settings, either for the agent identified by the agentId parameter
-     * (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint retrieves the plugin settings.
      *
      * @throws GuzzleException
      */
-    public function getPluginSettings(string $pluginId, ?string $agentId = null): PluginSettingsOutput
+    public function getPluginSettings(string $pluginId, string $agentId): PluginSettingsOutput
     {
         return $this->get(
             $this->formatUrl('/settings/' . $pluginId),
-            PluginSettingsOutput::class,
             $agentId,
+            PluginSettingsOutput::class,
         );
     }
 
     /**
-     * This endpoint updates the plugin settings, either for the agent identified by the agentId parameter
-     * (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint updates the plugin settings.
      *
      * @param array<string, mixed> $values
      *
      * @throws GuzzleException
      */
-    public function putPluginSettings(string $pluginId, array $values, ?string $agentId = null): PluginSettingsOutput
+    public function putPluginSettings(string $pluginId, string $agentId, array $values): PluginSettingsOutput
     {
         return $this->put(
             $this->formatUrl('/settings/' . $pluginId),
+            $agentId,
             PluginSettingsOutput::class,
             $values,
-            $agentId,
         );
     }
 }

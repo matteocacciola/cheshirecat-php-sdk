@@ -17,7 +17,7 @@ class RabbitHoleEndpointTest extends BaseTest
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->rabbitHole();
-        $result = $endpoint->getAllowedMimeTypes();
+        $result = $endpoint->getAllowedMimeTypes('agent');
 
         self::assertEquals($expected['allowed'], $result->allowed);
     }

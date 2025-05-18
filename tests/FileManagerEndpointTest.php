@@ -36,7 +36,7 @@ class FileManagerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->fileManager();
-        $result = $endpoint->getFileManagersSettings();
+        $result = $endpoint->getFileManagersSettings('agent');
 
         foreach ($expected['settings'] as $key => $setting) {
             self::assertEquals($setting['name'], $result->settings[$key]->name);
@@ -70,7 +70,7 @@ class FileManagerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->fileManager();
-        $result = $endpoint->getFileManagerSettings('testFileManager');
+        $result = $endpoint->getFileManagerSettings('testFileManager', 'agent');
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {
@@ -97,7 +97,7 @@ class FileManagerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->fileManager();
-        $result = $endpoint->putFileManagerSettings('testFileManager', $expected['value']);
+        $result = $endpoint->putFileManagerSettings('testFileManager', 'agent', $expected['value']);
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {

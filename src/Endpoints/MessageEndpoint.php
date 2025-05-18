@@ -16,13 +16,13 @@ class MessageEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException|\Exception
      */
-    public function sendHttpMessage(Message $message, ?string $agentId = null, ?string $userId = null): MessageOutput
+    public function sendHttpMessage(Message $message, string $agentId, string $userId): MessageOutput
     {
         return $this->postJson(
             '/message',
+            $agentId,
             MessageOutput::class,
             $message->toArray(),
-            $agentId,
             $userId,
         );
     }
@@ -34,8 +34,8 @@ class MessageEndpoint extends AbstractEndpoint
      */
     public function sendWebsocketMessage(
         Message $message,
-        ?string $agentId = null,
-        ?string $userId = null,
+        string $agentId,
+        string $userId,
         ?Closure $closure = null
     ): MessageOutput {
         $json = json_encode($message->toArray(), JSON_THROW_ON_ERROR);

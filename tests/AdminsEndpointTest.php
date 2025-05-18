@@ -199,7 +199,7 @@ class AdminsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->admins();
-        $result = $endpoint->postAgentReset();
+        $result = $endpoint->postAgentReset('agent');
 
         self::assertTrue($result->deletedSettings);
         self::assertTrue($result->deletedMemories);
@@ -218,7 +218,7 @@ class AdminsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->admins();
-        $result = $endpoint->postAgentDestroy();
+        $result = $endpoint->postAgentDestroy('agent');
 
         self::assertTrue($result->deletedSettings);
         self::assertTrue($result->deletedMemories);
@@ -236,7 +236,7 @@ class AdminsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->admins();
-        $result = $endpoint->postAgentCreate();
+        $result = $endpoint->postAgentCreate('agent');
 
         self::assertTrue($result->created);
     }

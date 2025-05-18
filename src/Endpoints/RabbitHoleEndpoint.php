@@ -109,9 +109,8 @@ class RabbitHoleEndpoint extends AbstractEndpoint
     }
 
     /**
-     * This method posts a memory point, either for the agent identified by the agentId parameter (for multi-agent
-     * installations) or for the default agent (for single-agent installations). The memory point is ingested into the
-     * RAG system. The process is asynchronous. The provided file must be in JSON format.
+     * This method posts a memory point. The memory point is ingested into the RAG system. The process is asynchronous.
+     * The provided file must be in JSON format.
      * The CheshireCat processes the injection in the background, and the client will be informed at the end of the
      * process.
      */
@@ -136,18 +135,15 @@ class RabbitHoleEndpoint extends AbstractEndpoint
     /**
      * This method retrieves the allowed MIME types for the RabbitHole API. The allowed MIME types are the MIME types
      * that are allowed to be uploaded to the RabbitHole API. The allowed MIME types are returned in a list.
-     * If the agentId parameter is provided, the allowed MIME types are retrieved for the agent identified by the
-     * agentId parameter (for multi-agent installations). If the agentId parameter is not provided, the allowed MIME
-     * types are retrieved for the default agent (for single-agent installations).
      *
      * @throws GuzzleException
      */
-    public function getAllowedMimeTypes(?string $agentId = null): AllowedMimeTypesOutput
+    public function getAllowedMimeTypes(string $agentId): AllowedMimeTypesOutput
     {
         return $this->get(
             $this->formatUrl('/allowed-mimetypes'),
-            AllowedMimeTypesOutput::class,
             $agentId,
+            AllowedMimeTypesOutput::class,
         );
     }
 }

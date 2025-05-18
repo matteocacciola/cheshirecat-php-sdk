@@ -11,38 +11,35 @@ class ChunkerEndpoint extends AbstractEndpoint
     protected string $prefix = '/chunking';
 
     /**
-     * This endpoint returns the settings of all chunkers, either for the agent identified by the agentId
-     * parameter (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint returns the settings of all chunkers.
      *
      * @throws GuzzleException
      */
-    public function getChunkersSettings(?string $agentId = null): FactoryObjectSettingsOutput
+    public function getChunkersSettings(string $agentId): FactoryObjectSettingsOutput
     {
         return $this->get(
             $this->formatUrl('/settings'),
-            FactoryObjectSettingsOutput::class,
             $agentId,
+            FactoryObjectSettingsOutput::class,
         );
     }
 
     /**
-     * This endpoint returns the settings of a specific chunker, either for the agent identified by the
-     * agentId parameter (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint returns the settings of a specific chunker.
      *
      * @throws GuzzleException
      */
-    public function getChunkerSettings(string $chunker, ?string $agentId = null): FactoryObjectSettingOutput
+    public function getChunkerSettings(string $chunker, string $agentId): FactoryObjectSettingOutput
     {
         return $this->get(
             $this->formatUrl('/settings/' . $chunker),
-            FactoryObjectSettingOutput::class,
             $agentId,
+            FactoryObjectSettingOutput::class,
         );
     }
 
     /**
-     * This endpoint updates the settings of a specific chunker, either for the agent identified by the
-     * agentId parameter (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint updates the settings of a specific chunker.
      *
      * @param array<string, mixed> $values
      *
@@ -50,14 +47,14 @@ class ChunkerEndpoint extends AbstractEndpoint
      */
     public function putChunkerSettings(
         string $chunker,
+        string $agentId,
         array $values,
-        ?string $agentId = null,
     ): FactoryObjectSettingOutput {
         return $this->put(
             $this->formatUrl('/settings/' . $chunker),
+            $agentId,
             FactoryObjectSettingOutput::class,
             $values,
-            $agentId,
         );
     }
 }

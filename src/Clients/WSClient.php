@@ -9,7 +9,7 @@ use WebSocket\Middleware\PingResponder;
 
 class WSClient
 {
-    protected ?Client $wsClient;
+    protected ?Client $wsClient = null;
     protected string $host;
     protected ?int $port;
     protected ?string $apikey;
@@ -36,7 +36,7 @@ class WSClient
         return $this;
     }
 
-    public function getClient(?string $agentId = null, ?string $userId = null): Client
+    public function getClient(string $agentId, string $userId): Client
     {
         if (!$this->apikey && !$this->token) {
             throw new \InvalidArgumentException('You must provide an apikey or a token');
@@ -49,17 +49,15 @@ class WSClient
         return $this->wsClient;
     }
 
-    public function getWsUri(?string $agentId = null, ?string $userId = null): Uri
+    public function getWsUri(string $agentId, string $userId): Uri
     {
         $query = [];
+        $query['user_id'] = $userId;
+
         if ($this->token) {
             $query['token'] = $this->token;
         } else {
             $query['apikey'] = $this->apikey;
-        }
-
-        if ($userId) {
-            $query['user_id'] = $userId;
         }
 
         return (new Uri())
@@ -71,7 +69,7 @@ class WSClient
         ;
     }
 
-    protected function createWsClient(?string $agentId = null, ?string $userId = null): Client
+    protected function createWsClient(string $agentId, string $userId): Client
     {
         $client = new Client($this->getWsUri($agentId, $userId));
         $client->setPersistent(true)

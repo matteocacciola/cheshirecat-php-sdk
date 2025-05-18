@@ -7,9 +7,6 @@ use DataMat\CheshireCat\DTO\Why;
 
 class ConversationHistoryItemContent extends MessageBase
 {
-    public string $text;
-
-    public ?string $image = null;
 
     /** @var Why|null */
     public ?Why $why = null;

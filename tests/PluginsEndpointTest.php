@@ -87,7 +87,7 @@ class PluginsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->plugins();
-        $result = $endpoint->getAvailablePlugins();
+        $result = $endpoint->getAvailablePlugins('agent');
 
         self::assertEquals($expected, $result->toArray());
     }
@@ -138,7 +138,7 @@ class PluginsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->plugins();
-        $result = $endpoint->getAvailablePlugins('Plugin 1');
+        $result = $endpoint->getAvailablePlugins('agent', 'Plugin 1');
 
         self::assertEquals($expected, $result->toArray());
     }
@@ -156,7 +156,7 @@ class PluginsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->plugins();
-        $result = $endpoint->putTogglePlugin($pluginId);
+        $result = $endpoint->putTogglePlugin($pluginId, 'agent');
 
         self::assertEquals($expected['info'], $result->info);
     }
@@ -210,7 +210,7 @@ class PluginsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->plugins();
-        $result = $endpoint->getPluginsSettings();
+        $result = $endpoint->getPluginsSettings('agent');
 
         self::assertInstanceOf(PluginsSettingsOutput::class, $result);
     }
@@ -242,7 +242,7 @@ class PluginsEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->plugins();
-        $result = $endpoint->getPluginSettings($expected['name']);
+        $result = $endpoint->getPluginSettings($expected['name'], 'agent');
 
         self::assertInstanceOf(PluginSettingsOutput::class, $result);
     }
@@ -264,7 +264,9 @@ class PluginsEndpointTest extends TestCase
 
         $endpoint = $cheshireCatClient->plugins();
         $result = $endpoint->putPluginSettings(
-            $expected['name'], ['setting_a' => 'some value', 'setting_b' => 'another value']
+            $expected['name'],
+            'agent',
+            ['setting_a' => 'some value', 'setting_b' => 'another value'],
         );
 
         self::assertInstanceOf(PluginSettingsOutput::class, $result);

@@ -25,49 +25,46 @@ class MemoryEndpoint extends AbstractEndpoint
     // -- Memory Collections API
 
     /**
-     * This endpoint returns the collections of memory points, either for the agent identified by the agentId parameter
-     * (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint returns the collections of memory points.
      *
      * @throws GuzzleException
      */
-    public function getMemoryCollections(?string $agentId = null): CollectionsOutput
+    public function getMemoryCollections(string $agentId): CollectionsOutput
     {
         return $this->get(
             $this->formatUrl('/collections'),
-            CollectionsOutput::class,
             $agentId,
+            CollectionsOutput::class,
         );
     }
 
     /**
-     * This endpoint deletes the all the points in all the collections of memory, either for the agent identified by
-     * the agentId parameter (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint deletes all the points in all the collections of memory.
      *
      * @throws GuzzleException
      */
-    public function deleteAllMemoryCollectionPoints(?string $agentId = null): CollectionPointsDestroyOutput
+    public function deleteAllMemoryCollectionPoints(string $agentId): CollectionPointsDestroyOutput
     {
         return $this->delete(
             $this->formatUrl('/collections'),
-            CollectionPointsDestroyOutput::class,
             $agentId,
+            CollectionPointsDestroyOutput::class,
         );
     }
 
     /**
-     * This method deletes all the points in a single collection of memory, either for the agent identified by the
-     * agentId parameter (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This method deletes all the points in a single collection of memory.
      *
      * @throws GuzzleException
      */
     public function deleteAllSingleMemoryCollectionPoints(
         Collection $collection,
-        ?string $agentId = null
+        string $agentId,
     ): CollectionPointsDestroyOutput {
         return $this->delete(
             $this->formatUrl('/collections/' . $collection->value),
-            CollectionPointsDestroyOutput::class,
             $agentId,
+            CollectionPointsDestroyOutput::class,
         );
     }
 
@@ -76,55 +73,49 @@ class MemoryEndpoint extends AbstractEndpoint
     // -- Memory Conversation History API
 
     /**
-     * This endpoint returns the conversation history, either for the agent identified by the agentId parameter
-     * (for multi-agent installations) or for the default agent (for single-agent installations). If the userId
-     * parameter is provided, the conversation history is filtered by the user ID.
+     * This endpoint returns the conversation history.
      *
      * @throws GuzzleException|\JsonException|RuntimeException
      */
-    public function getConversationHistory(?string $agentId = null, ?string $userId = null): ConversationHistoryOutput
+    public function getConversationHistory(string $agentId, string $userId): ConversationHistoryOutput
     {
         return $this->get(
             $this->formatUrl('/conversation_history'),
-            ConversationHistoryOutput::class,
             $agentId,
+            ConversationHistoryOutput::class,
             $userId,
         );
     }
 
     /**
-     * This endpoint deletes the conversation history, either for the agent identified by the agentId parameter
-     * (for multi-agent installations) or for the default agent (for single-agent installations). If the userId
-     * parameter is provided, the conversation history is filtered by the user ID.
+     * This endpoint deletes the conversation history for the agent identified by the agentId parameter.
      *
      * @throws GuzzleException
      */
     public function deleteConversationHistory(
-        ?string $agentId = null,
-        ?string $userId = null
+        string $agentId,
+        string $userId,
     ): ConversationHistoryDeleteOutput {
         return $this->delete(
             $this->formatUrl('/conversation_history'),
-            ConversationHistoryDeleteOutput::class,
             $agentId,
+            ConversationHistoryDeleteOutput::class,
             $userId,
         );
     }
 
     /**
-     * This endpoint creates a new element in the conversation history, either for the agent identified by the agentId
-     * parameter (for multi-agent installations) or for the default agent (for single-agent installations). If the
-     * userId parameter is provided, the conversation history is added to the user ID.
+     * This endpoint creates a new element in the conversation history.
      *
      * @throws GuzzleException
      */
     public function postConversationHistory(
         Role $who,
         string $text,
+        string $agentId,
+        string $userId,
         ?string $image = null,
         ?Why $why = null,
-        ?string $agentId = null,
-        ?string $userId = null
     ): ConversationHistoryOutput {
         $payload = [
             'who' => $who->value,
@@ -139,9 +130,9 @@ class MemoryEndpoint extends AbstractEndpoint
 
         return $this->postJson(
             $this->formatUrl('/conversation_history'),
+            $agentId,
             ConversationHistoryOutput::class,
             $payload,
-            $agentId,
             $userId,
         );
     }
@@ -150,11 +141,8 @@ class MemoryEndpoint extends AbstractEndpoint
 
     // -- Memory Points API
     /**
-     * This endpoint retrieves memory points based on the input text, either for the agent identified by the agentId
-     * parameter (for multi-agent installations) or for the default agent (for single-agent installations). The text
-     * parameter is the input text for which the memory points are retrieved. The k parameter is the number of memory
-     * points to retrieve.
-     * If the userId parameter is provided, the memory points are filtered by the user ID.
+     * This endpoint retrieves memory points based on the input text. The text parameter is the input text for which the
+     * memory points are retrieved. The k parameter is the number of memory points to retrieve.
      *
      * @param array<string, mixed>|null $metadata
      *
@@ -162,10 +150,10 @@ class MemoryEndpoint extends AbstractEndpoint
      */
     public function getMemoryRecall(
         string $text,
+        string $agentId,
+        string $userId,
         ?int $k = null,
         ?array $metadata = null,
-        ?string $agentId = null,
-        ?string $userId = null,
     ): MemoryRecallOutput {
         $query = ['text' => $text];
         if ($k) {
@@ -177,25 +165,23 @@ class MemoryEndpoint extends AbstractEndpoint
 
         return $this->get(
             $this->formatUrl('/recall'),
-            MemoryRecallOutput::class,
             $agentId,
+            MemoryRecallOutput::class,
             $userId,
             $query,
         );
     }
 
     /**
-     * This method posts a memory point, either for the agent identified by the agentId parameter (for multi-agent
-     * installations) or for the default agent (for single-agent installations).
-     * If the userId parameter is provided, the memory point is associated with the user ID.
+     * This method posts a memory point, for the agent identified by the agentId parameter.
      *
      * @throws GuzzleException
      */
     public function postMemoryPoint(
         Collection $collection,
+        string $agentId,
+        string $userId,
         MemoryPoint $memoryPoint,
-        ?string $agentId = null,
-        ?string $userId = null,
     ): MemoryPointOutput {
         if ($userId && empty($memoryPoint->metadata['source'])) {
             $memoryPoint->metadata = !empty($memoryPoint->metadata)
@@ -205,25 +191,23 @@ class MemoryEndpoint extends AbstractEndpoint
 
         return $this->postJson(
             $this->formatUrl('/collections/' . $collection->value . '/points'),
+            $agentId,
             MemoryPointOutput::class,
             $memoryPoint->toArray(),
-            $agentId,
         );
     }
 
     /**
-     * This method puts a memory point, either for the agent identified by the agentId parameter (for multi-agent
-     * installations) or for the default agent (for single-agent installations).
-     * If the userId parameter is provided, the memory point is associated with the user ID.
+     * This method puts a memory point, for the agent identified by the agentId parameter.
      *
      * @throws GuzzleException
      */
     public function putMemoryPoint(
         Collection $collection,
+        string $agentId,
+        string $userId,
         MemoryPoint $memoryPoint,
         string $pointId,
-        ?string $agentId = null,
-        ?string $userId = null,
     ): MemoryPointOutput {
         if ($userId && empty($memoryPoint->metadata['source'])) {
             $memoryPoint->metadata = !empty($memoryPoint->metadata)
@@ -233,34 +217,32 @@ class MemoryEndpoint extends AbstractEndpoint
 
         return $this->put(
             $this->formatUrl('/collections/' . $collection->value . '/points' . $pointId),
+            $agentId,
             MemoryPointOutput::class,
             $memoryPoint->toArray(),
-            $agentId,
         );
     }
 
     /**
-     * This endpoint deletes a memory point, either for the agent identified by the agentId parameter (for multi-agent
-     * installations) or for the default agent (for single-agent installations).
+     * This endpoint deletes a memory point, for the agent identified by the agentId parameter.
      *
      * @throws GuzzleException
      */
     public function deleteMemoryPoint(
         Collection $collection,
+        string $agentId,
         string $pointId,
-        ?string $agentId = null,
     ): MemoryPointDeleteOutput {
         return $this->delete(
             $this->formatUrl('/collections/' . $collection->value . '/points/'. $pointId),
-            MemoryPointDeleteOutput::class,
             $agentId,
+            MemoryPointDeleteOutput::class,
         );
     }
 
     /**
-     * This endpoint deletes memory points based on the metadata, either for the agent identified by the agentId
-     * parameter (for multi-agent installations) or for the default agent (for single-agent installations). The metadata
-     * parameter is a dictionary of key-value pairs that the memory points must match.
+     * This endpoint deletes memory points based on the metadata, for the agent identified by the agentId
+     * parameter. The metadata parameter is a dictionary of key-value pairs that the memory points must match.
      *
      * @param array<string, mixed>|null $metadata
      *
@@ -268,30 +250,29 @@ class MemoryEndpoint extends AbstractEndpoint
      */
     public function deleteMemoryPointsByMetadata(
         Collection $collection,
+        string $agentId,
         ?array $metadata = null,
-        ?string $agentId = null,
     ): MemoryPointsDeleteByMetadataOutput {
         return $this->delete(
             $this->formatUrl('/collections/' . $collection->value . '/points'),
-            MemoryPointsDeleteByMetadataOutput::class,
             $agentId,
+            MemoryPointsDeleteByMetadataOutput::class,
             null,
             $metadata ?? null,
         );
     }
 
     /**
-     * This endpoint retrieves memory points, either for the agent identified by the agentId parameter (for multi-agent
-     * installations) or for the default agent (for single-agent installations). The limit parameter is the maximum
-     * number of memory points to retrieve. The offset parameter is the number of memory points to skip.
+     * This endpoint retrieves memory points. The limit parameter is the maximum number of memory points to retrieve.
+     * The offset parameter is the number of memory points to skip.
      *
      * @throws GuzzleException
      */
     public function getMemoryPoints(
         Collection $collection,
+        string $agentId,
         ?int $limit = null,
         ?int $offset = null,
-        ?string $agentId = null,
     ): MemoryPointsOutput {
         $query = [];
         if ($limit !== null) {
@@ -303,8 +284,8 @@ class MemoryEndpoint extends AbstractEndpoint
 
         return $this->get(
             $this->formatUrl('/collections/' . $collection->value . '/points'),
-            MemoryPointsOutput::class,
             $agentId,
+            MemoryPointsOutput::class,
             null,
             $query ?: null,
         );

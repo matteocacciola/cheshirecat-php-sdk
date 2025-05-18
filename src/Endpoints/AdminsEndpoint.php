@@ -63,7 +63,7 @@ class AdminsEndpoint extends AbstractEndpoint
         }
 
         return $this->postJson(
-            $this->formatUrl('/users'), AdminOutput::class, $payload, $this->systemId
+            $this->formatUrl('/users'), $this->systemId, AdminOutput::class, $payload
         );
     }
 
@@ -105,7 +105,7 @@ class AdminsEndpoint extends AbstractEndpoint
      */
     public function getAdmin(string $adminId): AdminOutput
     {
-        return $this->get($this->formatUrl('/users/' . $adminId), AdminOutput::class, $this->systemId);
+        return $this->get($this->formatUrl('/users/' . $adminId), $this->systemId, AdminOutput::class);
     }
 
     /**
@@ -133,7 +133,7 @@ class AdminsEndpoint extends AbstractEndpoint
         }
 
         return $this->put(
-            $this->formatUrl('/users/' . $adminId), AdminOutput::class, $payload, $this->systemId
+            $this->formatUrl('/users/' . $adminId), $this->systemId, AdminOutput::class, $payload
         );
     }
 
@@ -144,7 +144,7 @@ class AdminsEndpoint extends AbstractEndpoint
      */
     public function deleteAdmin(string $adminId): AdminOutput
     {
-        return $this->delete($this->formatUrl('/users/' . $adminId), AdminOutput::class, $this->systemId);
+        return $this->delete($this->formatUrl('/users/' . $adminId), $this->systemId, AdminOutput::class);
     }
 
     /**
@@ -156,9 +156,8 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->postJson(
             $this->formatUrl('/utils/factory/reset/'),
-            ResetOutput::class,
-            [],
             $this->systemId,
+            ResetOutput::class,
         );
     }
 
@@ -173,7 +172,6 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->get(
             $this->formatUrl('/utils/agents/'),
-            null,
             $this->systemId,
         );
     }
@@ -183,13 +181,12 @@ class AdminsEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException
      */
-    public function postAgentCreate(?string $agentId = null): CreatedOutput
+    public function postAgentCreate(string $agentId): CreatedOutput
     {
         return $this->postJson(
             $this->formatUrl('/utils/agent/create/'),
-            CreatedOutput::class,
-            [],
             $agentId,
+            CreatedOutput::class,
         );
     }
 
@@ -198,13 +195,12 @@ class AdminsEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException
      */
-    public function postAgentReset(?string $agentId = null): ResetOutput
+    public function postAgentReset(string $agentId): ResetOutput
     {
         return $this->postJson(
             $this->formatUrl('/utils/agent/reset/'),
-            ResetOutput::class,
-            [],
             $agentId,
+            ResetOutput::class,
         );
     }
 
@@ -213,13 +209,12 @@ class AdminsEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException
      */
-    public function postAgentDestroy(?string $agentId = null): ResetOutput
+    public function postAgentDestroy(string $agentId): ResetOutput
     {
         return $this->postJson(
             $this->formatUrl('/utils/agent/destroy/'),
-            ResetOutput::class,
-            [],
             $agentId,
+            ResetOutput::class,
         );
     }
 
@@ -232,8 +227,8 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->get(
             $this->formatUrl('/plugins'),
-            PluginCollectionOutput::class,
             $this->systemId,
+            PluginCollectionOutput::class,
             null,
             $pluginName ? ['query' => $pluginName] : []
         );
@@ -248,6 +243,7 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->postMultipart(
             $this->formatUrl('/plugins/upload'),
+            $this->systemId,
             PluginInstallOutput::class,
             [
                 [
@@ -256,7 +252,6 @@ class AdminsEndpoint extends AbstractEndpoint
                     'filename' => basename($pathZip),
                 ],
             ],
-            $this->systemId,
         );
     }
 
@@ -269,9 +264,9 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->postJson(
             $this->formatUrl('/plugins/upload/registry'),
+            $this->systemId,
             PluginInstallFromRegistryOutput::class,
             ['url' => $url],
-            $this->systemId,
         );
     }
 
@@ -284,8 +279,8 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->get(
             $this->formatUrl('/plugins/settings'),
-            PluginsSettingsOutput::class,
             $this->systemId,
+            PluginsSettingsOutput::class,
         );
     }
 
@@ -298,8 +293,8 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->get(
             $this->formatUrl('/plugins/settings/' . $pluginId),
-            PluginSettingsOutput::class,
             $this->systemId,
+            PluginSettingsOutput::class,
         );
     }
 
@@ -312,8 +307,8 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->get(
             $this->formatUrl('/plugins/' . $pluginId),
-            PluginDetailsOutput::class,
             $this->systemId,
+            PluginDetailsOutput::class,
         );
     }
 
@@ -326,8 +321,8 @@ class AdminsEndpoint extends AbstractEndpoint
     {
         return $this->delete(
             $this->formatUrl('/plugins/' . $pluginId),
-            PluginDeleteOutput::class,
             $this->systemId,
+            PluginDeleteOutput::class,
         );
     }
 }

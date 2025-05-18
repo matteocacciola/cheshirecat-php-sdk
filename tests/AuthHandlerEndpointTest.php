@@ -36,7 +36,7 @@ class AuthHandlerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->authHandler();
-        $result = $endpoint->getAuthHandlersSettings();
+        $result = $endpoint->getAuthHandlersSettings('agent');
 
         foreach ($expected['settings'] as $key => $setting) {
             self::assertEquals($setting['name'], $result->settings[$key]->name);
@@ -70,7 +70,7 @@ class AuthHandlerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->authHandler();
-        $result = $endpoint->getAuthHandlerSettings('testAuthHandler');
+        $result = $endpoint->getAuthHandlerSettings('testAuthHandler', 'agent');
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {
@@ -97,7 +97,7 @@ class AuthHandlerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->authHandler();
-        $result = $endpoint->putAuthHandlerSettings('testAuthHandler', $expected['value']);
+        $result = $endpoint->putAuthHandlerSettings('testAuthHandler', 'agent', $expected['value']);
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {

@@ -9,12 +9,14 @@ class CustomEndpoint extends AbstractEndpoint
     /**
      * This method is used to trigger a custom endpoint with a GET method
      *
+     * @param array<string, mixed>|null $query
+     *
      * @return array<int|string, mixed>
      * @throws GuzzleException
      */
-    public function getCustom(string $url, ?string $agentId = null, ?string $userId = null): array
+    public function getCustom(string $url, string $agentId, ?string $userId = null, ?array $query = null): array
     {
-        return $this->get($url, 'json', $agentId, $userId);
+        return $this->get($url, $agentId, 'json', $userId, $query);
     }
 
     /**
@@ -25,11 +27,11 @@ class CustomEndpoint extends AbstractEndpoint
      */
     public function postCustom(
         string $url,
+        string $agentId,
         ?array $payload = null,
-        ?string $agentId = null,
         ?string $userId = null,
     ): array {
-        return $this->postJson($url, 'json', $payload, $agentId, $userId);
+        return $this->postJson($url, $agentId, 'json', $payload, $userId);
     }
 
     /**
@@ -40,11 +42,11 @@ class CustomEndpoint extends AbstractEndpoint
      */
     public function putCustom(
         string $url,
+        string $agentId,
         ?array $payload = null,
-        ?string $agentId = null,
         ?string $userId = null,
     ): array {
-        return $this->put($url, 'json', $payload, $agentId, $userId);
+        return $this->put($url, $agentId, 'json', $payload, $userId);
     }
 
     /**
@@ -56,10 +58,10 @@ class CustomEndpoint extends AbstractEndpoint
      */
     public function deleteCustom(
         string $url,
+        string $agentId,
         ?array $payload = null,
-        ?string $agentId = null,
         ?string $userId = null,
     ): array {
-        return $this->delete($url, 'json', $payload, $agentId, $userId);
+        return $this->delete($url, $agentId, 'json', $payload, $userId);
     }
 }

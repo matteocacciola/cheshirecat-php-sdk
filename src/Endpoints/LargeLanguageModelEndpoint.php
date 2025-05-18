@@ -11,38 +11,35 @@ class LargeLanguageModelEndpoint extends AbstractEndpoint
     protected string $prefix = '/llm';
 
     /**
-     * This endpoint returns the settings of all large language models, either for the agent identified by the agentId
-     * parameter (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint returns the settings of all large language models.
      *
      * @throws GuzzleException
      */
-    public function getLargeLanguageModelsSettings(?string $agentId = null): FactoryObjectSettingsOutput
+    public function getLargeLanguageModelsSettings(string $agentId): FactoryObjectSettingsOutput
     {
         return $this->get(
             $this->formatUrl('/settings'),
-            FactoryObjectSettingsOutput::class,
             $agentId,
+            FactoryObjectSettingsOutput::class,
         );
     }
 
     /**
-     * This endpoint returns the settings of a specific large language model, either for the agent identified by the
-     * agentId parameter (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint returns the settings of a specific large language model.
      *
      * @throws GuzzleException
      */
-    public function getLargeLanguageModelSettings(string $llm, ?string $agentId = null): FactoryObjectSettingOutput
+    public function getLargeLanguageModelSettings(string $llm, string $agentId): FactoryObjectSettingOutput
     {
         return $this->get(
             $this->formatUrl('/settings/' . $llm),
-            FactoryObjectSettingOutput::class,
             $agentId,
+            FactoryObjectSettingOutput::class,
         );
     }
 
     /**
-     * This endpoint updates the settings of a specific large language model, either for the agent identified by the
-     * agentId parameter (for multi-agent installations) or for the default agent (for single-agent installations).
+     * This endpoint updates the settings of a specific large language model.
      *
      * @param array<string, mixed> $values
      *
@@ -50,14 +47,14 @@ class LargeLanguageModelEndpoint extends AbstractEndpoint
      */
     public function putLargeLanguageModelSettings(
         string $llm,
+        string $agentId,
         array $values,
-        ?string $agentId = null,
     ): FactoryObjectSettingOutput {
         return $this->put(
             $this->formatUrl('/settings/' . $llm),
+            $agentId,
             FactoryObjectSettingOutput::class,
             $values,
-            $agentId,
         );
     }
 }

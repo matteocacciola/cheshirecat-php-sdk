@@ -38,8 +38,6 @@ class UsersEndpoint extends AbstractEndpoint
     /**
      * This endpoint is used to get a list of available permissions in the system. The permissions are used to define
      * the access rights of the users in the system. The permissions are defined by the system administrator.
-     * The endpoint can be used either for the agent identified by the agentId parameter (for multi-agent installations)
-     * or for the default agent (for single-agent installations).
      *
      * @return array<int|string, mixed>
      * @throws GuzzleException
@@ -55,19 +53,16 @@ class UsersEndpoint extends AbstractEndpoint
      * This endpoint is used to create a new user in the system. The user is created with the specified username and
      * password. The user is assigned the specified permissions. The permissions are used to define the access rights
      * of the user in the system and are defined by the system administrator.
-     * The endpoint can be used either for the
-     * agent identified by the agentId parameter (for multi-agent installations) or for the default agent (for
-     * single-agent installations).
      *
      * @param array<string, mixed>|null $permissions
      *
      * @throws GuzzleException
      */
     public function postUser(
+        string $agentId,
         string $username,
         string $password,
         ?array $permissions = null,
-        ?string $agentId = null,
     ): UserOutput {
         $payload = [
             'username' => $username,
@@ -79,9 +74,9 @@ class UsersEndpoint extends AbstractEndpoint
 
         return $this->postJson(
             $this->prefix,
+            $agentId,
             UserOutput::class,
             $payload,
-            $agentId,
         );
     }
 
@@ -89,8 +84,6 @@ class UsersEndpoint extends AbstractEndpoint
      * This endpoint is used to get a list of users in the system. The list includes the username and the permissions of
      * each user. The permissions are used to define the access rights of the users in the system and are defined by the
      * system administrator.
-     * The endpoint can be used either for the agent identified by the agentId parameter (for multi-agent installations)
-     * or for the default agent (for single-agent installations).
      *
      * @return UserOutput[]
      * @throws GuzzleException|\JsonException
@@ -114,17 +107,15 @@ class UsersEndpoint extends AbstractEndpoint
      * provided by the CheshireCat API when the user was created. The endpoint returns the username and the permissions
      * of the user. The permissions are used to define the access rights of the user in the system and are defined by
      * the system administrator.
-     * The endpoint can be used either for the agent identified by the agentId parameter (for multi-agent installations)
-     * or for the default agent (for single-agent installations).
      *
      * @throws GuzzleException
      */
-    public function getUser(string $userId, ?string $agentId = null): UserOutput
+    public function getUser(string $userId, string $agentId): UserOutput
     {
         return $this->get(
             $this->formatUrl($userId),
-            UserOutput::class,
             $agentId,
+            UserOutput::class,
         );
     }
 
@@ -133,8 +124,6 @@ class UsersEndpoint extends AbstractEndpoint
      * provided by the CheshireCat API when the user was created. The endpoint updates the username, the password, and
      * the permissions of the user. The permissions are used to define the access rights of the user in the system and
      * are defined by the system administrator.
-     * The endpoint can be used either for the agent identified by the agentId parameter (for multi-agent installations)
-     * or for the default agent (for single-agent installations).
      *
      * @param array<string, mixed>|null $permissions
      *
@@ -142,10 +131,10 @@ class UsersEndpoint extends AbstractEndpoint
      */
     public function putUser(
         string $userId,
+        string $agentId,
         ?string $username = null,
         ?string $password = null,
         ?array $permissions = null,
-        ?string $agentId = null,
     ): UserOutput {
         $payload = [];
         if ($username !== null) {
@@ -160,26 +149,24 @@ class UsersEndpoint extends AbstractEndpoint
 
         return $this->put(
             $this->formatUrl($userId),
+            $agentId,
             UserOutput::class,
             $payload,
-            $agentId,
         );
     }
 
     /**
      * This endpoint is used to delete the user in the system. The user is identified by the userId parameter,
      * previously provided by the CheshireCat API when the user was created.
-     * The endpoint can be used either for the agent identified by the agentId parameter (for multi-agent installations)
-     * or for the default agent (for single-agent installations).
      *
      * @throws GuzzleException
      */
-    public function deleteUser(string $userId, ?string $agentId = null): UserOutput
+    public function deleteUser(string $userId, string $agentId): UserOutput
     {
         return $this->delete(
             $this->formatUrl($userId),
-            UserOutput::class,
             $agentId,
+            UserOutput::class,
         );
     }
 }

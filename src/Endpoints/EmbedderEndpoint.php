@@ -21,8 +21,8 @@ class EmbedderEndpoint extends AbstractEndpoint
     {
         return $this->get(
             $this->formatUrl('/settings'),
-            FactoryObjectSettingsOutput::class,
             $this->systemId,
+            FactoryObjectSettingsOutput::class,
         );
     }
 
@@ -36,8 +36,8 @@ class EmbedderEndpoint extends AbstractEndpoint
     {
         return $this->get(
             $this->formatUrl('/settings/' . $embedder),
-            FactoryObjectSettingOutput::class,
             $this->systemId,
+            FactoryObjectSettingOutput::class,
         );
     }
 
@@ -53,9 +53,9 @@ class EmbedderEndpoint extends AbstractEndpoint
     {
         return $this->put(
             $this->formatUrl('/settings/' . $embedder),
+            $this->systemId,
             FactoryObjectSettingOutput::class,
             $values,
-            $this->systemId,
         );
     }
 }

@@ -36,7 +36,7 @@ class ChunkerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->chunker();
-        $result = $endpoint->getChunkersSettings();
+        $result = $endpoint->getChunkersSettings('agent');
 
         foreach ($expected['settings'] as $key => $setting) {
             self::assertEquals($setting['name'], $result->settings[$key]->name);
@@ -70,7 +70,7 @@ class ChunkerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->chunker();
-        $result = $endpoint->getChunkerSettings('testChunker');
+        $result = $endpoint->getChunkerSettings('testChunker', 'agent');
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {
@@ -97,7 +97,7 @@ class ChunkerEndpointTest extends TestCase
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->chunker();
-        $result = $endpoint->putChunkerSettings('testChunker', $expected['value']);
+        $result = $endpoint->putChunkerSettings('testChunker', 'agent', $expected['value']);
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {
