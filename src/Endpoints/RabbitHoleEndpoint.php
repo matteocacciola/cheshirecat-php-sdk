@@ -146,4 +146,20 @@ class RabbitHoleEndpoint extends AbstractEndpoint
             AllowedMimeTypesOutput::class,
         );
     }
+
+    /**
+     * This method retrieves the web sources for the RabbitHole API. The web sources are the web URLs that are allowed
+     * to be uploaded to the RabbitHole API. The web sources are returned in a list.
+     *
+     * @return array<string>
+     *
+     * @throws GuzzleException
+     */
+    public function getWebSources(string $agentId): array
+    {
+        return $this->get(
+            $this->formatUrl('/web'),
+            $agentId,
+        );
+    }
 }
