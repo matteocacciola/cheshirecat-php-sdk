@@ -9,7 +9,7 @@ class Record
     /** @var array<string, mixed>|null  */
     public ?array $payload;
 
-    /** @var float[]|null  */
+    /** @var float[]|float[][]|array<string, mixed>|null  */
     public ?array $vector;
 
     public ?string $shardKey;
