@@ -6,6 +6,6 @@ class MemoryRecallQuery
 {
     public string $text;
 
-    /** @var float[] */
+    /** @var float[]|float[][]|array<string, mixed> */
     public array $vector;
 }

@@ -8,7 +8,7 @@ class MemoryPointOutput extends MemoryPoint
 {
     public string $id;
 
-    /** @var float[] */
+    /** @var float[]|float[][]|array<string, mixed> */
     public array $vector;
 
 }
