@@ -42,9 +42,9 @@ class UsersEndpoint extends AbstractEndpoint
      * @return array<int|string, mixed>
      * @throws GuzzleException
      */
-    public function getAvailablePermissions(?string $agentId = null): array
+    public function getAvailablePermissions(): array
     {
-        $response = $this->getHttpClient($agentId)->get('/auth/available-permissions');
+        $response = $this->getHttpClient()->get('/auth/available-permissions');
 
         return $this->client->getSerializer()->decode($response->getBody()->getContents(), 'json');
     }

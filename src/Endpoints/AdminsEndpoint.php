@@ -46,6 +46,20 @@ class AdminsEndpoint extends AbstractEndpoint
     }
 
     /**
+     * This endpoint is used to get a list of available permissions in the system. The permissions are used to define
+     * the access rights of the users in the system. The permissions are defined by the system administrator.
+     *
+     * @return array<int|string, mixed>
+     * @throws GuzzleException
+     */
+    public function getAvailablePermissions(): array
+    {
+        $response = $this->getHttpClient()->get($this->formatUrl('/auth/available-permissions'));
+
+        return $this->client->getSerializer()->decode($response->getBody()->getContents(), 'json');
+    }
+
+    /**
      * This endpoint is used to create a new admin user in the system.
      *
      * @param array<string, mixed>|null $permissions

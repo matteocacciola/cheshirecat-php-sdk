@@ -44,6 +44,26 @@ class AdminsEndpointTest extends TestCase
     }
 
     /**
+     * @throws GuzzleException|\JsonException|Exception
+     */
+    public function testGetAvailablePermissionsSuccess(): void
+    {
+        $expected = [
+            "STATUS" => ["READ"],
+            "MEMORY" => ["READ", "LIST"],
+            "CONVERSATION" => ["WRITE", "EDIT", "LIST", "READ", "DELETE"],
+            "STATIC" => ["READ"],
+        ];
+
+        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
+
+        $endpoint = $cheshireCatClient->admins();
+        $result = $endpoint->getAvailablePermissions();
+
+        self::assertEquals($expected, $result);
+    }
+
+    /**
      * @throws \JsonException|GuzzleException|Exception
      */
     public function testPostAdminSuccess(): void
