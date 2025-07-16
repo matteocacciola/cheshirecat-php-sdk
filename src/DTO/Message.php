@@ -33,7 +33,7 @@ class Message extends MessageBase
         ];
 
         if ($this->metadata !== null) {
-            $result = array_merge($result, ['metadata' => $this->metadata]);
+            $result['metadata'] = $this->metadata;
         }
 
         return $result;
