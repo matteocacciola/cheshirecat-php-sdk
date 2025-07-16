@@ -7,19 +7,19 @@ class Message extends MessageBase
     /**
      * @var array<string, mixed>|null
      */
-    public ?array $additionalFields;
+    public ?array $metadata;
 
     /**
-     * @param array<string, mixed>|null $additionalFields
+     * @param array<string, mixed>|null $metadata
      */
     public function __construct(
         string $text,
         ?string $image = null,
-        ?array $additionalFields = null
+        ?array $metadata = null
     ) {
         $this->text = $text;
         $this->image = $image;
-        $this->additionalFields = $additionalFields;
+        $this->metadata = $metadata;
     }
 
     /**
@@ -32,8 +32,8 @@ class Message extends MessageBase
             'image' => $this->image,
         ];
 
-        if ($this->additionalFields !== null) {
-            $result = array_merge($result, $this->additionalFields);
+        if ($this->metadata !== null) {
+            $result = array_merge($result, ['metadata' => $this->metadata]);
         }
 
         return $result;
