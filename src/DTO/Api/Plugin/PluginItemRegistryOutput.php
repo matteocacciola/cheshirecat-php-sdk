@@ -4,25 +4,25 @@ namespace DataMat\CheshireCat\DTO\Api\Plugin;
 
 class PluginItemRegistryOutput
 {
-    public string $id;
+    public ?string $id = null;
 
     public string $name;
 
-    public string $description;
+    public ?string $description = null;
 
-    public string $authorName;
+    public ?string $authorName = null;
 
-    public string $authorUrl;
+    public ?string $authorUrl = null;
 
-    public string $pluginUrl;
+    public ?string $pluginUrl = null;
 
-    public string $tags;
+    public ?string $tags = null;
 
-    public string $thumb;
+    public ?string $thumb = null;
 
-    public string $version;
+    public ?string $version = null;
 
-    public string $url;
+    public ?string $url = null;
 
     /**
      * @return array<string, string>
