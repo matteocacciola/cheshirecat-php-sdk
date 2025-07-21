@@ -6,6 +6,7 @@ use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingOutput;
 use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingsOutput;
 use DataMat\CheshireCat\DTO\Api\FileManager\FileManagerAttributes;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\StreamInterface;
 
 class FileManagerEndpoint extends AbstractEndpoint
 {
@@ -66,5 +67,12 @@ class FileManagerEndpoint extends AbstractEndpoint
     public function getFileManagerAttributes(string $agentId): FileManagerAttributes
     {
         return $this->get($this->prefix, $agentId, FileManagerAttributes::class);
+    }
+
+    public function getFile(string $agentId, string $filePath): StreamInterface
+    {
+        return $this->getHttpClient($agentId)->get($this->formatUrl('/download/' . $filePath), [
+            'stream' => true
+        ])->getBody();
     }
 }
