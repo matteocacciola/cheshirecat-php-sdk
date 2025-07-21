@@ -9,7 +9,7 @@ class MessageOutput extends MessageBase
 {
     public ?string $type = 'chat';
 
-    public Why $why;
+    public ?Why $why = null;
 
     public ?bool $error = false;
 
@@ -34,7 +34,7 @@ class MessageOutput extends MessageBase
         $data = parent::toArray();
 
         $data['type'] = $this->type;
-        $data['why'] = $this->why->toArray();
+        $data['why'] = $this->why?->toArray();
         $data['content'] = $this->text;
         $data['error'] = $this->error;
 
