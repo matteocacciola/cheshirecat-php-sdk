@@ -9,8 +9,8 @@ class PropertySettingsOutput
     /** @var array<string, mixed>|null */
     public ?array $extra = null;
 
-    public string $title;
+    public ?string $title = null;
 
-    public string $type;
+    public ?string $type = null;
 
 }
