@@ -266,6 +266,8 @@ class MemoryEndpoint extends AbstractEndpoint
      * This endpoint retrieves memory points. The limit parameter is the maximum number of memory points to retrieve.
      * The offset parameter is the number of memory points to skip.
      *
+     * @param array<string, mixed>|null $metadata
+     *
      * @throws GuzzleException
      */
     public function getMemoryPoints(
@@ -273,6 +275,7 @@ class MemoryEndpoint extends AbstractEndpoint
         string $agentId,
         ?int $limit = null,
         ?int $offset = null,
+        ?array $metadata = null,
     ): MemoryPointsOutput {
         $query = [];
         if ($limit !== null) {
@@ -280,6 +283,9 @@ class MemoryEndpoint extends AbstractEndpoint
         }
         if ($offset !== null) {
             $query['offset'] = $offset;
+        }
+        if ($metadata) {
+            $query['metadata'] = json_encode($metadata, JSON_THROW_ON_ERROR);
         }
 
         return $this->get(
