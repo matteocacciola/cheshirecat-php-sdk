@@ -63,6 +63,11 @@ abstract class AbstractEndpoint
         }
 
         $response = $this->getHttpClient($agentId, $userId)->get($endpoint, $options);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to fetch data from endpoint %s: %s', $endpoint, $response->getReasonPhrase())
+            );
+        }
 
         if ($outputClass === null) {
             return $response->getBody()->getContents();
@@ -89,6 +94,11 @@ abstract class AbstractEndpoint
         }
 
         $response = $this->getHttpClient($agentId, $userId)->post($endpoint, $options);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to post data to endpoint %s: %s', $endpoint, $response->getReasonPhrase())
+            );
+        }
 
         return $this->deserialize($response->getBody()->getContents(), $outputClass);
     }
@@ -111,6 +121,11 @@ abstract class AbstractEndpoint
         }
 
         $response = $this->getHttpClient($agentId, $userId)->post($endpoint, $options);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to post data to endpoint %s: %s', $endpoint, $response->getReasonPhrase())
+            );
+        }
 
         return $this->deserialize($response->getBody()->getContents(), $outputClass);
     }
@@ -133,6 +148,11 @@ abstract class AbstractEndpoint
         }
 
         $response = $this->getHttpClient($agentId, $userId)->put($endpoint, $options);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to put data to endpoint %s: %s', $endpoint, $response->getReasonPhrase())
+            );
+        }
 
         return $this->deserialize($response->getBody()->getContents(), $outputClass);
     }
@@ -155,6 +175,11 @@ abstract class AbstractEndpoint
         }
 
         $response = $this->getHttpClient($agentId, $userId)->delete($endpoint, $options);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to delete data from endpoint %s: %s', $endpoint, $response->getReasonPhrase())
+            );
+        }
 
         return $this->deserialize($response->getBody()->getContents(), $outputClass);
     }

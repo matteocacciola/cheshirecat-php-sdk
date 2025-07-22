@@ -44,7 +44,13 @@ class UsersEndpoint extends AbstractEndpoint
      */
     public function getAvailablePermissions(): array
     {
-        $response = $this->getHttpClient()->get('/auth/available-permissions');
+        $endpoint = '/auth/available-permissions';
+        $response = $this->getHttpClient()->get($endpoint);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to fetch data from endpoint %s: %s', $endpoint, $response->getReasonPhrase())
+            );
+        }
 
         return $this->client->getSerializer()->decode($response->getBody()->getContents(), 'json');
     }
@@ -91,6 +97,11 @@ class UsersEndpoint extends AbstractEndpoint
     public function getUsers(?string $agentId = null): array
     {
         $response = $this->getHttpClient($agentId)->get($this->prefix);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to fetch data from endpoint %s: %s', $this->prefix, $response->getReasonPhrase())
+            );
+        }
 
         $response = $this->client->getSerializer()->decode($response->getBody()->getContents(), 'json');
         $result = [];

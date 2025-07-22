@@ -54,7 +54,13 @@ class AdminsEndpoint extends AbstractEndpoint
      */
     public function getAvailablePermissions(): array
     {
-        $response = $this->getHttpClient()->get($this->formatUrl('/auth/available-permissions'));
+        $endpoint = $this->formatUrl('/auth/available-permissions');
+        $response = $this->getHttpClient()->get($endpoint);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to fetch data from endpoint %s: %s', $endpoint, $response->getReasonPhrase())
+            );
+        }
 
         return $this->client->getSerializer()->decode($response->getBody()->getContents(), 'json');
     }
@@ -97,10 +103,17 @@ class AdminsEndpoint extends AbstractEndpoint
             $query['skip'] = $skip;
         }
 
+        $endpoint = $this->formatUrl('/users');
+
         $response = $this->getHttpClient($this->systemId)->get(
-            $this->formatUrl('/users'),
+            $endpoint,
             $query ? ['query' => $query] : []
         );
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to fetch data from endpoint %s: %s', $endpoint, $response->getReasonPhrase())
+            );
+        }
 
         $response = $this->client->getSerializer()->decode($response->getBody()->getContents(), 'json');
         $result = [];
