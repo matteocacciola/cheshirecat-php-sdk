@@ -2,9 +2,8 @@
 
 namespace DataMat\CheshireCat\DTO\Api\Setting;
 
-
 class SettingsOutputCollection
 {
-    /** @var SettingOutput[] */
+    /** @var array<string, mixed>[] */
     public array $settings;
 }
