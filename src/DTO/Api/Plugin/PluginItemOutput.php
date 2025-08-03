@@ -16,7 +16,7 @@ class PluginItemOutput
 
     public ?string $pluginUrl = null;
 
-    public ?string $tags = null;
+    private ?string $tags = null;
 
     public ?string $thumb = null;
 
@@ -36,6 +36,20 @@ class PluginItemOutput
     /** @var array<int, EndpointOutput> */
     public array $endpoints;
 
+    public function getTags(): ?string
+    {
+        return $this->tags;
+    }
+
+    public function setTags(mixed $tags): void
+    {
+        if (is_array($tags)) {
+            $this->tags = implode(', ', $tags);
+        } else {
+            $this->tags = $tags;
+        }
+    }
+
     /**
      * @return array<string, mixed>
      */
@@ -48,7 +62,7 @@ class PluginItemOutput
             'author_name' => $this->authorName,
             'author_url' => $this->authorUrl,
             'plugin_url' => $this->pluginUrl,
-            'tags' => $this->tags,
+            'tags' => $this->getTags(),
             'thumb' => $this->thumb,
             'version' => $this->version,
             'active' => $this->active,
