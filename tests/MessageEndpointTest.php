@@ -24,7 +24,6 @@ class MessageEndpointTest extends TestCase
             'why' => [
                 'input' => 'input',
                 'memory' => [
-                    'episodic' => [],
                     'declarative' => [],
                     'procedural' => [],
                 ],
@@ -44,7 +43,6 @@ class MessageEndpointTest extends TestCase
         self::assertEquals($response->content, $expected['text']);
         self::assertEquals($response->type, $expected['type']);
         self::assertEquals($response->why->input, $expected['why']['input']);
-        self::assertEquals($response->why->memory->episodic, $expected['why']['memory']['episodic']);
         self::assertEquals($response->why->memory->declarative, $expected['why']['memory']['declarative']);
         self::assertEquals($response->why->memory->procedural, $expected['why']['memory']['procedural']);
     }
@@ -60,7 +58,6 @@ class MessageEndpointTest extends TestCase
             'why' => [
                 'input' => 'input',
                 'memory' => [
-                    'episodic' => [],
                     'declarative' => [],
                     'procedural' => [],
                 ],
@@ -79,7 +76,6 @@ class MessageEndpointTest extends TestCase
         self::assertEquals($response->text, $expected['text']);
         self::assertEquals($response->type, $expected['type']);
         self::assertEquals($response->why->input, $expected['why']['input']);
-        self::assertEquals($response->why->memory->episodic, $expected['why']['memory']['episodic']);
         self::assertEquals($response->why->memory->declarative, $expected['why']['memory']['declarative']);
         self::assertEquals($response->why->memory->procedural, $expected['why']['memory']['procedural']);
     }

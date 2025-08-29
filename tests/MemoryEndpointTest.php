@@ -21,7 +21,6 @@ class MemoryEndpointTest extends BaseTest
     {
         $expected = [
             'collections' => [
-                ['name' => 'episodic', 'vectors_count' => 100],
                 ['name' => 'declarative', 'vectors_count' => 100],
                 ['name' => 'procedural', 'vectors_count' => 100],
             ],
@@ -45,7 +44,6 @@ class MemoryEndpointTest extends BaseTest
     {
         $expected = [
             'deleted' => [
-                'episodic' => true,
                 'declarative' => false,
                 'procedural' => true,
             ],
@@ -68,16 +66,16 @@ class MemoryEndpointTest extends BaseTest
     {
         $expected = [
             'deleted' => [
-                'episodic' => true,
+                'declarative' => true,
             ],
         ];
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
         $endpoint = $cheshireCatClient->memory();
-        $result = $endpoint->deleteAllSingleMemoryCollectionPoints(Collection::Episodic, 'agent');
+        $result = $endpoint->deleteAllSingleMemoryCollectionPoints(Collection::Declarative, 'agent');
 
-        self::assertEquals($expected['deleted']['episodic'], $result->deleted['episodic']);
+        self::assertEquals($expected['deleted']['declarative'], $result->deleted['declarative']);
     }
 
     /**
@@ -88,14 +86,14 @@ class MemoryEndpointTest extends BaseTest
         $expected = [
             'history' => [
                 [
-                    'who' => 'Human',
+                    'who' => 'user',
                     'when' => 0.0,
                     'content' => [
                         'text' => 'Hey you!',
                     ],
                 ],
                 [
-                    'who' => 'AI',
+                    'who' => 'assistant',
                     'when' => 0.1,
                     'content' => [
                         'text' => 'Hi!',
@@ -135,14 +133,14 @@ class MemoryEndpointTest extends BaseTest
         $expected = [
             'history' => [
                 [
-                    'who' => 'Human',
+                    'who' => 'user',
                     'when' => 0.0,
                     'content' => [
                         'text' => 'Hey you!',
                     ],
                 ],
                 [
-                    'who' => 'AI',
+                    'who' => 'assistant',
                     'when' => 0.1,
                     'content' => [
                         'text' => 'Hi!',
@@ -151,7 +149,6 @@ class MemoryEndpointTest extends BaseTest
                             'intermediate_steps' => [],
                             'model_interactions' => [],
                             'memory' => [
-                                'episodic' => [],
                                 'declarative' => [],
                                 'procedural' => [],
                             ],
@@ -162,7 +159,6 @@ class MemoryEndpointTest extends BaseTest
         ];
 
         $memory = MemoryBuilder::create()
-            ->setEpisodic($expected['history'][1]['content']['why']['memory']['episodic'])
             ->setDeclarative($expected['history'][1]['content']['why']['memory']['declarative'])
             ->setProcedural($expected['history'][1]['content']['why']['memory']['procedural'])
             ->build();
@@ -178,7 +174,7 @@ class MemoryEndpointTest extends BaseTest
 
         $endpoint = $cheshireCatClient->memory();
         $result = $endpoint->postConversationHistory(
-            Role::AI,
+            Role::ASSISTANT,
             $expected['history'][1]['content']['text'],
             'agent',
             'user',
@@ -199,7 +195,6 @@ class MemoryEndpointTest extends BaseTest
             'vectors' => [
                 'embedder' => 'testEmbedder',
                 'collections' => [
-                    'episodic' => [],
                     'procedural' => [],
                     'declarative' => [],
                 ],

@@ -7,9 +7,6 @@ use DataMat\CheshireCat\DTO\Memory;
 class MemoryBuilder implements BaseBuilder
 {
     /** @var array<string, mixed>|null */
-    private ?array $episodic = [];
-
-    /** @var array<string, mixed>|null */
     private ?array $declarative = [];
 
     /** @var array<string, mixed>|null */
@@ -18,16 +15,6 @@ class MemoryBuilder implements BaseBuilder
     public static function create() : MemoryBuilder
     {
         return new self();
-    }
-
-    /**
-     * @param array<string, mixed> $episodic
-     */
-    public function setEpisodic(?array $episodic = null): MemoryBuilder
-    {
-        $this->episodic = $episodic ?? [];
-
-        return $this;
     }
 
     /**
@@ -53,7 +40,6 @@ class MemoryBuilder implements BaseBuilder
     public function build(): Memory
     {
         $memory = new Memory();
-        $memory->episodic = $this->episodic;
         $memory->declarative = $this->declarative;
         $memory->procedural = $this->procedural;
 

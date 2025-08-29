@@ -5,9 +5,6 @@ namespace DataMat\CheshireCat\DTO;
 class Memory
 {
     /** @var array<string, mixed>|null */
-    public ?array $episodic = [];
-
-    /** @var array<string, mixed>|null */
     public ?array $declarative = [];
 
     /** @var array<string, mixed>|null */
@@ -19,7 +16,6 @@ class Memory
     public function toArray(): array
     {
         return [
-            'episodic' => $this->episodic,
             'declarative' => $this->declarative,
             'procedural' => $this->procedural,
         ];
