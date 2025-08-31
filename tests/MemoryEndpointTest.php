@@ -147,7 +147,6 @@ class MemoryEndpointTest extends BaseTest
                         'why' => [
                             'input' => 'input',
                             'intermediate_steps' => [],
-                            'model_interactions' => [],
                             'memory' => [
                                 'declarative' => [],
                                 'procedural' => [],
@@ -166,7 +165,6 @@ class MemoryEndpointTest extends BaseTest
         $why = WhyBuilder::create()
             ->setInput($expected['history'][1]['content']['why']['input'])
             ->setIntermediateSteps($expected['history'][1]['content']['why']['intermediate_steps'])
-            ->setModelInteractions($expected['history'][1]['content']['why']['model_interactions'])
             ->setMemory($memory)
             ->build();
 

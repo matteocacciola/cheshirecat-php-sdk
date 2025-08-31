@@ -14,10 +14,6 @@ class WhyBuilder implements BaseBuilder
 
     private Memory $memory;
 
-    /** @var null|array<string, mixed> */
-
-    private ?array $modelInteractions = [];
-
     public static function create() : WhyBuilder
     {
         return new self();
@@ -47,23 +43,12 @@ class WhyBuilder implements BaseBuilder
         return $this;
     }
 
-    /**
-     * @param array<string, mixed> $modelInteractions
-     */
-    public function setModelInteractions(?array $modelInteractions = null): WhyBuilder
-    {
-        $this->modelInteractions = $modelInteractions ?? [];
-
-        return $this;
-    }
-
     public function build(): Why
     {
         $why = new Why();
         $why->input = $this->input;
         $why->intermediateSteps = $this->intermediateSteps;
         $why->memory = $this->memory;
-        $why->modelInteractions = $this->modelInteractions;
 
         return $why;
     }
