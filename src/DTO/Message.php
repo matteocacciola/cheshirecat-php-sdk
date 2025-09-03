@@ -9,21 +9,17 @@ class Message extends MessageBase
      */
     public ?array $metadata;
 
-    public bool $stream = false;
-
     /**
      * @param array<string, mixed>|null $metadata
      */
     public function __construct(
         string $text,
         ?string $image = null,
-        ?array $metadata = null,
-        bool $stream = false
+        ?array $metadata = null
     ) {
         $this->text = $text;
         $this->image = $image;
         $this->metadata = $metadata;
-        $this->stream = $stream;
     }
 
     /**
@@ -34,7 +30,6 @@ class Message extends MessageBase
         $result = [
             'text' => $this->text,
             'image' => $this->image,
-            'stream' => $this->stream,
         ];
 
         if ($this->metadata !== null) {
