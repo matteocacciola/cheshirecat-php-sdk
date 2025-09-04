@@ -22,7 +22,6 @@ class MemoryEndpointTest extends BaseTest
         $expected = [
             'collections' => [
                 ['name' => 'declarative', 'vectors_count' => 100],
-                ['name' => 'procedural', 'vectors_count' => 100],
             ],
         ];
 
@@ -45,7 +44,6 @@ class MemoryEndpointTest extends BaseTest
         $expected = [
             'deleted' => [
                 'declarative' => false,
-                'procedural' => true,
             ],
         ];
 
@@ -149,7 +147,6 @@ class MemoryEndpointTest extends BaseTest
                             'intermediate_steps' => [],
                             'memory' => [
                                 'declarative' => [],
-                                'procedural' => [],
                             ],
                         ],
                     ],
@@ -159,7 +156,6 @@ class MemoryEndpointTest extends BaseTest
 
         $memory = MemoryBuilder::create()
             ->setDeclarative($expected['history'][1]['content']['why']['memory']['declarative'])
-            ->setProcedural($expected['history'][1]['content']['why']['memory']['procedural'])
             ->build();
 
         $why = WhyBuilder::create()
@@ -193,7 +189,6 @@ class MemoryEndpointTest extends BaseTest
             'vectors' => [
                 'embedder' => 'testEmbedder',
                 'collections' => [
-                    'procedural' => [],
                     'declarative' => [],
                 ],
             ],
