@@ -11,10 +11,9 @@ use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointsDeleteByMetadataOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointsOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\MemoryRecallOutput;
+use DataMat\CheshireCat\DTO\Api\Memory\Nested\CollectionsItem;
 use DataMat\CheshireCat\DTO\MemoryPoint;
 use DataMat\CheshireCat\DTO\Why;
-use DataMat\CheshireCat\Enum\Collection;
-use DataMat\CheshireCat\Enum\Role;
 use GuzzleHttp\Exception\GuzzleException;
 use RuntimeException;
 
@@ -58,13 +57,27 @@ class MemoryEndpoint extends AbstractEndpoint
      * @throws GuzzleException
      */
     public function deleteAllSingleMemoryCollectionPoints(
-        Collection $collection,
+        string $collection,
         string $agentId,
     ): CollectionPointsDestroyOutput {
         return $this->delete(
-            $this->formatUrl('/collections/' . $collection->value),
+            $this->formatUrl('/collections/' . $collection),
             $agentId,
             CollectionPointsDestroyOutput::class,
+        );
+    }
+
+    /**
+     * This endpoint creates and returns a collection of memory points.
+     *
+     * @throws GuzzleException
+     */
+    public function postMemoryCollections(string $collection, string $agentId): CollectionsItem
+    {
+        return $this->postJson(
+            $this->formatUrl('/collections/' . $collection),
+            $agentId,
+            CollectionsItem::class,
         );
     }
 
@@ -110,7 +123,7 @@ class MemoryEndpoint extends AbstractEndpoint
      * @throws GuzzleException
      */
     public function postConversationHistory(
-        Role $who,
+        string $who,
         string $text,
         string $agentId,
         string $userId,
@@ -118,7 +131,7 @@ class MemoryEndpoint extends AbstractEndpoint
         ?Why $why = null,
     ): ConversationHistoryOutput {
         $payload = [
-            'who' => $who->value,
+            'who' => $who,
             'text' => $text,
         ];
         if ($image) {
@@ -178,7 +191,7 @@ class MemoryEndpoint extends AbstractEndpoint
      * @throws GuzzleException
      */
     public function postMemoryPoint(
-        Collection $collection,
+        string $collection,
         string $agentId,
         string $userId,
         MemoryPoint $memoryPoint,
@@ -190,7 +203,7 @@ class MemoryEndpoint extends AbstractEndpoint
         }
 
         return $this->postJson(
-            $this->formatUrl('/collections/' . $collection->value . '/points'),
+            $this->formatUrl('/collections/' . $collection . '/points'),
             $agentId,
             MemoryPointOutput::class,
             $memoryPoint->toArray(),
@@ -203,7 +216,7 @@ class MemoryEndpoint extends AbstractEndpoint
      * @throws GuzzleException
      */
     public function putMemoryPoint(
-        Collection $collection,
+        string $collection,
         string $agentId,
         string $userId,
         MemoryPoint $memoryPoint,
@@ -216,7 +229,7 @@ class MemoryEndpoint extends AbstractEndpoint
         }
 
         return $this->put(
-            $this->formatUrl('/collections/' . $collection->value . '/points' . $pointId),
+            $this->formatUrl('/collections/' . $collection . '/points' . $pointId),
             $agentId,
             MemoryPointOutput::class,
             $memoryPoint->toArray(),
@@ -229,12 +242,12 @@ class MemoryEndpoint extends AbstractEndpoint
      * @throws GuzzleException
      */
     public function deleteMemoryPoint(
-        Collection $collection,
+        string $collection,
         string $agentId,
         string $pointId,
     ): MemoryPointDeleteOutput {
         return $this->delete(
-            $this->formatUrl('/collections/' . $collection->value . '/points/'. $pointId),
+            $this->formatUrl('/collections/' . $collection . '/points/'. $pointId),
             $agentId,
             MemoryPointDeleteOutput::class,
         );
@@ -249,12 +262,12 @@ class MemoryEndpoint extends AbstractEndpoint
      * @throws GuzzleException
      */
     public function deleteMemoryPointsByMetadata(
-        Collection $collection,
+        string $collection,
         string $agentId,
         ?array $metadata = null,
     ): MemoryPointsDeleteByMetadataOutput {
         return $this->delete(
-            $this->formatUrl('/collections/' . $collection->value . '/points'),
+            $this->formatUrl('/collections/' . $collection . '/points'),
             $agentId,
             MemoryPointsDeleteByMetadataOutput::class,
             null,
@@ -271,7 +284,7 @@ class MemoryEndpoint extends AbstractEndpoint
      * @throws GuzzleException
      */
     public function getMemoryPoints(
-        Collection $collection,
+        string $collection,
         string $agentId,
         ?int $limit = null,
         ?int $offset = null,
@@ -289,7 +302,7 @@ class MemoryEndpoint extends AbstractEndpoint
         }
 
         return $this->get(
-            $this->formatUrl('/collections/' . $collection->value . '/points'),
+            $this->formatUrl('/collections/' . $collection . '/points'),
             $agentId,
             MemoryPointsOutput::class,
             null,
