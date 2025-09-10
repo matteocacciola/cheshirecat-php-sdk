@@ -31,6 +31,7 @@ use Symfony\Component\Serializer\Serializer;
  * @method \DataMat\CheshireCat\Endpoints\SettingsEndpoint settings()
  * @method \DataMat\CheshireCat\Endpoints\UsersEndpoint users()
  * @method \DataMat\CheshireCat\Endpoints\VectorDatabaseEndpoint vectorDatabase()
+ * @method \DataMat\CheshireCat\Endpoints\HealthCheckEndpoint healthCheck()
  */
 class CheshireCatClient
 {
