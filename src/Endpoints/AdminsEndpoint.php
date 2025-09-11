@@ -11,6 +11,7 @@ use DataMat\CheshireCat\DTO\Api\Admins\PluginInstallOutput;
 use DataMat\CheshireCat\DTO\Api\Admins\ResetOutput;
 use DataMat\CheshireCat\DTO\Api\Plugin\PluginCollectionOutput;
 use DataMat\CheshireCat\DTO\Api\Plugin\PluginsSettingsOutput;
+use DataMat\CheshireCat\DTO\Api\Plugin\PluginToggleOutput;
 use DataMat\CheshireCat\DTO\Api\Plugin\Settings\PluginSettingsOutput;
 use DataMat\CheshireCat\DTO\Api\TokenOutput;
 use GuzzleHttp\Exception\GuzzleException;
@@ -350,6 +351,20 @@ class AdminsEndpoint extends AbstractEndpoint
             $this->formatUrl('/plugins/' . $pluginId),
             $this->systemId,
             PluginDeleteOutput::class,
+        );
+    }
+
+    /**
+     * This endpoint toggles a plugin.
+     *
+     * @throws GuzzleException
+     */
+    public function putTogglePlugin(string $pluginId): PluginToggleOutput
+    {
+        return $this->put(
+            $this->formatUrl('/toggle/' . $pluginId),
+            $this->systemId,
+            PluginToggleOutput::class,
         );
     }
 }
