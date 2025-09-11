@@ -362,7 +362,7 @@ class AdminsEndpoint extends AbstractEndpoint
     public function putTogglePlugin(string $pluginId): PluginToggleOutput
     {
         return $this->put(
-            $this->formatUrl('/toggle/' . $pluginId),
+            $this->formatUrl('/plugins/toggle/' . $pluginId),
             $this->systemId,
             PluginToggleOutput::class,
         );
