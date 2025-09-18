@@ -33,11 +33,14 @@ class PluginsEndpointTest extends TestCase
                     'tags' => 'tag1, tag2',
                     'thumb' => 'https://thumb1.com',
                     'version' => '1.0.0',
-                    'active' => true,
-                    'hooks' => [],
-                    'tools' => [],
-                    'forms' => [],
-                    'endpoints' => [],
+                    'local_info' => [
+                        'active' => true,
+                        'hooks' => [],
+                        'tools' => [],
+                        'forms' => [],
+                        'endpoints' => [],
+                        'mcp_clients' => [],
+                    ],
                 ],
                 [
                     'id' => '2',
@@ -49,12 +52,15 @@ class PluginsEndpointTest extends TestCase
                     'tags' => 'tag1, tag2',
                     'thumb' => 'https://thumb2.com',
                     'version' => '1.0.0',
-                    'active' => true,
-                    'hooks' => [],
-                    'tools' => [],
-                    'forms' => [],
-                    'endpoints' => [],
-                ]
+                    'local_info' => [
+                        'active' => true,
+                        'hooks' => [],
+                        'tools' => [],
+                        'forms' => [],
+                        'endpoints' => [],
+                        'mcp_clients' => [],
+                    ],
+                ],
             ],
             'registry' => [
                 [
@@ -80,8 +86,8 @@ class PluginsEndpointTest extends TestCase
                     'thumb' => 'https://thumb2.com',
                     'version' => '1.0.0',
                     'url' => 'https://plugin2.com',
-                ]
-            ]
+                ],
+            ],
         ];
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
@@ -112,11 +118,14 @@ class PluginsEndpointTest extends TestCase
                     'tags' => 'tag1, tag2',
                     'thumb' => 'https://thumb1.com',
                     'version' => '1.0.0',
-                    'active' => true,
-                    'hooks' => [],
-                    'tools' => [],
-                    'forms' => [],
-                    'endpoints' => [],
+                    'local_info' => [
+                        'active' => true,
+                        'hooks' => [],
+                        'tools' => [],
+                        'forms' => [],
+                        'endpoints' => [],
+                        'mcp_clients' => [],
+                    ],
                 ],
             ],
             'registry' => [
@@ -132,7 +141,7 @@ class PluginsEndpointTest extends TestCase
                     'version' => '1.0.0',
                     'url' => 'https://plugin1.com',
                 ],
-            ]
+            ],
         ];
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);

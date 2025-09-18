@@ -281,11 +281,14 @@ class AdminsEndpointTest extends TestCase
                     'tags' => 'tag1, tag2',
                     'thumb' => 'https://thumb1.com',
                     'version' => '1.0.0',
-                    'active' => true,
-                    'hooks' => [],
-                    'tools' => [],
-                    'forms' => [],
-                    'endpoints' => [],
+                    'local_info' => [
+                        'active' => true,
+                        'hooks' => [],
+                        'tools' => [],
+                        'forms' => [],
+                        'endpoints' => [],
+                        'mcp_clients' => [],
+                    ]
                 ],
                 [
                     'id' => '2',
@@ -298,7 +301,7 @@ class AdminsEndpointTest extends TestCase
                     'thumb' => 'https://thumb2.com',
                     'version' => '1.0.0',
                     'active' => true,
-                    'hooks' => [],
+                    'v' => [],
                     'tools' => [],
                     'forms' => [],
                     'endpoints' => [],
@@ -474,14 +477,16 @@ class AdminsEndpointTest extends TestCase
             'data' => [
                 'id' => 'core_plugin',
                 'title' => 'Setting 1',
-                'active' => true,
-                'hooks' => [
-                    ['name' => 'hook1', 'priority' => 1],
-                    ['name' => 'hook2', 'priority' => 0],
-                ],
-                'tools' => [
-                    ['name' => 'tool1', 'priority' => 1],
-                    ['name' => 'tool2', 'priority' => 0],
+                'local_info' => [
+                    'active' => true,
+                    'hooks' => [
+                        ['name' => 'hook1', 'priority' => 1],
+                        ['name' => 'hook2', 'priority' => 0],
+                    ],
+                    'tools' => [
+                        ['name' => 'tool1', 'priority' => 1],
+                        ['name' => 'tool2', 'priority' => 0],
+                    ],
                 ],
             ],
         ];
