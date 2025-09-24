@@ -4,8 +4,6 @@ namespace DataMat\CheshireCat\Endpoints;
 
 use DataMat\CheshireCat\DTO\Api\Memory\CollectionPointsDestroyOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\CollectionsOutput;
-use DataMat\CheshireCat\DTO\Api\Memory\ConversationHistoryDeleteOutput;
-use DataMat\CheshireCat\DTO\Api\Memory\ConversationHistoryOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointDeleteOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointsDeleteByMetadataOutput;
@@ -13,9 +11,7 @@ use DataMat\CheshireCat\DTO\Api\Memory\MemoryPointsOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\MemoryRecallOutput;
 use DataMat\CheshireCat\DTO\Api\Memory\Nested\CollectionsItem;
 use DataMat\CheshireCat\DTO\MemoryPoint;
-use DataMat\CheshireCat\DTO\Why;
 use GuzzleHttp\Exception\GuzzleException;
-use RuntimeException;
 
 class MemoryEndpoint extends AbstractEndpoint
 {
@@ -82,75 +78,6 @@ class MemoryEndpoint extends AbstractEndpoint
     }
 
     // END Memory Collections API --
-
-    // -- Memory Conversation History API
-
-    /**
-     * This endpoint returns the conversation history.
-     *
-     * @throws GuzzleException|\JsonException|RuntimeException
-     */
-    public function getConversationHistory(string $agentId, string $userId): ConversationHistoryOutput
-    {
-        return $this->get(
-            $this->formatUrl('/conversation_history'),
-            $agentId,
-            ConversationHistoryOutput::class,
-            $userId,
-        );
-    }
-
-    /**
-     * This endpoint deletes the conversation history for the agent identified by the agentId parameter.
-     *
-     * @throws GuzzleException
-     */
-    public function deleteConversationHistory(
-        string $agentId,
-        string $userId,
-    ): ConversationHistoryDeleteOutput {
-        return $this->delete(
-            $this->formatUrl('/conversation_history'),
-            $agentId,
-            ConversationHistoryDeleteOutput::class,
-            $userId,
-        );
-    }
-
-    /**
-     * This endpoint creates a new element in the conversation history.
-     *
-     * @throws GuzzleException
-     */
-    public function postConversationHistory(
-        string $who,
-        string $text,
-        string $agentId,
-        string $userId,
-        ?string $image = null,
-        ?Why $why = null,
-    ): ConversationHistoryOutput {
-        $payload = [
-            'who' => $who,
-            'text' => $text,
-        ];
-        if ($image) {
-            $payload['image'] = $image;
-        }
-        if ($why) {
-            $payload['why'] = $why->toArray();
-        }
-
-        return $this->postJson(
-            $this->formatUrl('/conversation_history'),
-            $agentId,
-            ConversationHistoryOutput::class,
-            $payload,
-            $userId,
-        );
-    }
-
-    // END Memory Conversation History API --
 
     // -- Memory Points API
     /**

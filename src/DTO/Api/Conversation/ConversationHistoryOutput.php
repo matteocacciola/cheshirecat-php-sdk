@@ -1,6 +1,6 @@
 <?php
 
-namespace DataMat\CheshireCat\DTO\Api\Memory;
+namespace DataMat\CheshireCat\DTO\Api\Conversation;
 
 use DataMat\CheshireCat\DTO\Api\Memory\Nested\ConversationHistoryItem;
 
