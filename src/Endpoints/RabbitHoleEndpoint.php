@@ -102,6 +102,7 @@ class RabbitHoleEndpoint extends AbstractEndpoint
     public function postWeb(
         string $webUrl,
         ?string $agentId = null,
+        ?string $chatId = null,
         ?array $metadata = null,
     ): PromiseInterface {
         $payload = ['url' => $webUrl];
@@ -109,7 +110,9 @@ class RabbitHoleEndpoint extends AbstractEndpoint
             $payload['metadata'] = $metadata;
         }
 
-        return $this->getHttpClient($agentId)->postAsync($this->formatUrl('/web'), [
+        $endpoint = $chatId ? $this->formatUrl('/web/' . $chatId) : $this->formatUrl('/web');
+
+        return $this->getHttpClient($agentId)->postAsync($endpoint, [
             'json' => $payload,
         ]);
     }
