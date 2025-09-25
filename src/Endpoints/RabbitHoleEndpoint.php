@@ -24,6 +24,7 @@ class RabbitHoleEndpoint extends AbstractEndpoint
         string $filePath,
         ?string $fileName,
         ?string $agentId = null,
+        ?string $chatId = null,
         ?array $metadata = null,
     ): PromiseInterface {
         $fileName = $fileName ?: basename($filePath);
@@ -43,7 +44,9 @@ class RabbitHoleEndpoint extends AbstractEndpoint
             ];
         }
 
-        return $this->getHttpClient($agentId)->postAsync($this->prefix, ['multipart' => $multipartData]);
+        $endpoint = $chatId ? $this->formatUrl($chatId) : $this->prefix;
+
+        return $this->getHttpClient($agentId)->postAsync($endpoint, ['multipart' => $multipartData]);
     }
 
     /**
@@ -60,6 +63,7 @@ class RabbitHoleEndpoint extends AbstractEndpoint
     public function postFiles(
         array $filePaths,
         ?string $agentId = null,
+        ?string $chatId = null,
         ?array $metadata = null,
     ): PromiseInterface {
         $multipartData = [];
@@ -79,7 +83,9 @@ class RabbitHoleEndpoint extends AbstractEndpoint
             ];
         }
 
-        return $this->getHttpClient($agentId)->postAsync($this->formatUrl('/batch'), [
+        $endpoint = $chatId ? $this->formatUrl('/batch/' . $chatId) : $this->formatUrl('/batch');
+
+        return $this->getHttpClient($agentId)->postAsync($endpoint, [
             'multipart' => $multipartData,
         ]);
     }
