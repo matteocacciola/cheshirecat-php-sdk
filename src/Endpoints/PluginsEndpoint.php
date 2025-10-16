@@ -86,4 +86,18 @@ class PluginsEndpoint extends AbstractEndpoint
             $values,
         );
     }
+
+    /**
+     * This endpoint resets the plugin settings.
+     *
+     * @throws GuzzleException
+     */
+    public function postResetPluginSettings(string $pluginId, string $agentId): PluginSettingsOutput
+    {
+        return $this->postJson(
+            $this->formatUrl('/settings/' . $pluginId),
+            $agentId,
+            PluginSettingsOutput::class,
+        );
+    }
 }
