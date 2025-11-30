@@ -5,6 +5,7 @@ namespace DataMat\CheshireCat\Endpoints;
 use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingOutput;
 use DataMat\CheshireCat\DTO\Api\Factory\FactoryObjectSettingsOutput;
 use DataMat\CheshireCat\DTO\Api\FileManager\FileManagerAttributes;
+use DataMat\CheshireCat\DTO\Api\FileManager\FileManagerDeletedFiles;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\StreamInterface;
 
@@ -69,10 +70,24 @@ class FileManagerEndpoint extends AbstractEndpoint
         return $this->get($this->prefix, $agentId, FileManagerAttributes::class);
     }
 
-    public function getFile(string $agentId, string $filePath): StreamInterface
+    public function getFile(string $agentId, string $fileName): StreamInterface
     {
-        return $this->getHttpClient($agentId)->get($this->formatUrl('/download/' . $filePath), [
+        return $this->getHttpClient($agentId)->get($this->formatUrl('/files/' . $fileName), [
             'stream' => true
         ])->getBody();
+    }
+
+    public function deleteFile(string $agentId, string $fileName): FileManagerDeletedFiles
+    {
+        return $this->delete(
+            $this->formatUrl('/files/' . $fileName), $agentId, FileManagerDeletedFiles::class
+        );
+    }
+
+    public function deleteFiles(string $agentId): FileManagerDeletedFiles
+    {
+        return $this->delete(
+            $this->formatUrl('/files'), $agentId, FileManagerDeletedFiles::class
+        );
     }
 }
