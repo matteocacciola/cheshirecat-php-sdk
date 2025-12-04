@@ -30,6 +30,7 @@ use Symfony\Component\Serializer\Serializer;
  * @method \DataMat\CheshireCat\Endpoints\PluginsEndpoint plugins()
  * @method \DataMat\CheshireCat\Endpoints\RabbitHoleEndpoint rabbitHole()
  * @method \DataMat\CheshireCat\Endpoints\UsersEndpoint users()
+ * @method \DataMat\CheshireCat\Endpoints\UtilsEndpoint utils()
  * @method \DataMat\CheshireCat\Endpoints\VectorDatabaseEndpoint vectorDatabase()
  * @method \DataMat\CheshireCat\Endpoints\HealthCheckEndpoint healthCheck()
  */

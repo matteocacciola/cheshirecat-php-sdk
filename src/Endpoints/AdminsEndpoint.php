@@ -3,12 +3,10 @@
 namespace DataMat\CheshireCat\Endpoints;
 
 use DataMat\CheshireCat\DTO\Api\Admins\AdminOutput;
-use DataMat\CheshireCat\DTO\Api\Admins\CreatedOutput;
 use DataMat\CheshireCat\DTO\Api\Admins\PluginDeleteOutput;
 use DataMat\CheshireCat\DTO\Api\Admins\PluginDetailsOutput;
 use DataMat\CheshireCat\DTO\Api\Admins\PluginInstallFromRegistryOutput;
 use DataMat\CheshireCat\DTO\Api\Admins\PluginInstallOutput;
-use DataMat\CheshireCat\DTO\Api\Admins\ResetOutput;
 use DataMat\CheshireCat\DTO\Api\Plugin\PluginCollectionOutput;
 use DataMat\CheshireCat\DTO\Api\Plugin\PluginsSettingsOutput;
 use DataMat\CheshireCat\DTO\Api\Plugin\PluginToggleOutput;
@@ -173,77 +171,6 @@ class AdminsEndpoint extends AbstractEndpoint
     public function deleteAdmin(string $adminId): AdminOutput
     {
         return $this->delete($this->formatUrl('/users/' . $adminId), $this->systemId, AdminOutput::class);
-    }
-
-    /**
-     * This endpoint is used to reset the system to factory settings. This will delete all data in the system.
-     *
-     * @throws GuzzleException
-     */
-    public function postFactoryReset(): ResetOutput
-    {
-        return $this->postJson(
-            $this->formatUrl('/utils/factory/reset/'),
-            $this->systemId,
-            ResetOutput::class,
-        );
-    }
-
-    /**
-     * This endpoint is used to retrieve all the agents in the system.
-     *
-     * @return string[]
-     *
-     * @throws GuzzleException
-     */
-    public function getAgents(): array
-    {
-        return $this->get(
-            $this->formatUrl('/utils/agents/'),
-            $this->systemId,
-        );
-    }
-
-    /**
-     * This endpoint is used to create a new agent from scratch.
-     *
-     * @throws GuzzleException
-     */
-    public function postAgentCreate(string $agentId): CreatedOutput
-    {
-        return $this->postJson(
-            $this->formatUrl('/utils/agent/create/'),
-            $agentId,
-            CreatedOutput::class,
-        );
-    }
-
-    /**
-     * This endpoint is used to reset the agent to factory settings. This will delete all data in the agent.
-     *
-     * @throws GuzzleException
-     */
-    public function postAgentReset(string $agentId): ResetOutput
-    {
-        return $this->postJson(
-            $this->formatUrl('/utils/agent/reset/'),
-            $agentId,
-            ResetOutput::class,
-        );
-    }
-
-    /**
-     * This endpoint is used to reset the agent to factory settings. This will delete all data in the agent.
-     *
-     * @throws GuzzleException
-     */
-    public function postAgentDestroy(string $agentId): ResetOutput
-    {
-        return $this->postJson(
-            $this->formatUrl('/utils/agent/destroy/'),
-            $agentId,
-            ResetOutput::class,
-        );
     }
 
     /**
