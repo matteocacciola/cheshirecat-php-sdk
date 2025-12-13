@@ -2,7 +2,7 @@
 
 namespace DataMat\CheshireCat\DTO\Api\Memory\Nested;
 
-class ConversationHistoryItem
+class ConversationMessage
 {
     public string $who;
 

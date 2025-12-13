@@ -2,11 +2,11 @@
 
 namespace DataMat\CheshireCat\DTO\Api\Conversation;
 
-use DataMat\CheshireCat\DTO\Api\Memory\Nested\ConversationHistoryItem;
+use DataMat\CheshireCat\DTO\Api\Memory\Nested\ConversationMessage;
 
 class ConversationHistoryOutput
 {
-    /** @var ConversationHistoryItem[] */
+    /** @var ConversationMessage[] */
     public array $history;
 
     /**

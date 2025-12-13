@@ -2,7 +2,7 @@
 
 namespace DataMat\CheshireCat\DTO\Api\Conversation;
 
-class ConversationHistoryDeleteOutput
+class ConversationDeleteOutput
 {
     public bool $deleted;
 }
