@@ -14,8 +14,9 @@ class HttpClient
     protected Uri $httpUri;
     protected ?string $apikey;
     protected ?string $token;
-    protected ?string $userId = null;
     protected ?string $agentId = null;
+    protected ?string $userId = null;
+    protected ?string $chatId = null;
 
     /** @var array<string, callable> */
     protected array $middlewares;
@@ -65,14 +66,15 @@ class HttpClient
         return $this;
     }
 
-    public function getClient(?string $agentId = null, ?string $userId = null): Client
+    public function getClient(?string $agentId = null, ?string $userId = null, ?string $chatId = null): Client
     {
         if (!$this->apikey && !$this->token) {
             throw new \InvalidArgumentException('You must provide an apikey or a token');
         }
 
-        $this->agentId = $agentId ?? 'agent';
+        $this->agentId = $agentId;
         $this->userId = $userId;
+        $this->chatId = $chatId;
 
         return $this->httpClient;
     }
@@ -94,6 +96,9 @@ class HttpClient
             if (!empty($this->agentId)) {
                 $request = $request->withHeader('agent_id', $this->agentId);
             }
+            if (!empty($this->chatId)) {
+                $request = $request->withHeader('chat_id', $this->chatId);
+            }
         };
     }
 
@@ -105,6 +110,9 @@ class HttpClient
             }
             if (!empty($this->agentId)) {
                 $request = $request->withHeader('agent_id', $this->agentId);
+            }
+            if (!empty($this->chatId)) {
+                $request = $request->withHeader('chat_id', $this->chatId);
             }
         };
     }

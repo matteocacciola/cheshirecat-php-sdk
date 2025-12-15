@@ -36,42 +36,48 @@ class WSClient
         return $this;
     }
 
-    public function getClient(string $agentId, string $userId): Client
+    public function getClient(string $agentId, string $userId, ?string $chatId = null): Client
     {
         if (!$this->apikey && !$this->token) {
             throw new \InvalidArgumentException('You must provide an apikey or a token');
         }
 
         if (!$this->wsClient) {
-            $this->wsClient = $this->createWsClient($agentId, $userId);
+            $this->wsClient = $this->createWsClient($agentId, $userId, $chatId);
         }
 
         return $this->wsClient;
     }
 
-    public function getWsUri(string $agentId, string $userId): Uri
+    public function getWsUri(string $agentId, string $userId, ?string $chatId = null): Uri
     {
         $query = [];
         $query['user_id'] = $userId;
 
-        if ($this->token) {
-            $query['token'] = $this->token;
-        } else {
-            $query['apikey'] = $this->apikey;
+        $path = sprintf('ws/%s', $agentId);
+        if ($chatId) {
+            $path .= sprintf('/%s', $chatId);
         }
 
         return (new Uri())
             ->withScheme($this->isWSS ? 'wss' : 'ws')
             ->withHost($this->host)
-            ->withPath(sprintf('ws/%s', $agentId))
+            ->withPath($path)
             ->withQueryItems($query)
             ->withPort($this->port)
-        ;
+            ;
     }
 
-    protected function createWsClient(string $agentId, string $userId): Client
+    protected function createWsClient(string $agentId, string $userId, ?string $chatId = null): Client
     {
-        $client = new Client($this->getWsUri($agentId, $userId));
+        $bearerToken = $this->token ?? $this->apikey;
+
+        $client = new Client($this->getWsUri($agentId, $userId, $chatId), [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $bearerToken
+            ]
+        ]);
+
         $client->setPersistent(true)
             ->setTimeout(100000)
             // Add CloseHandler middleware

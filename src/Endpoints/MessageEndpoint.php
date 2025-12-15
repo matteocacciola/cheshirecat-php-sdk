@@ -16,7 +16,12 @@ class MessageEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException|\Exception
      */
-    public function sendHttpMessage(Message $message, string $agentId, string $userId): MessageOutput
+    public function sendHttpMessage(
+        Message $message,
+        string $agentId,
+        string $userId,
+        ?string $chatId = null,
+    ): MessageOutput
     {
         return $this->postJson(
             '/message',
@@ -24,6 +29,7 @@ class MessageEndpoint extends AbstractEndpoint
             MessageOutput::class,
             $message->toArray(),
             $userId,
+            $chatId,
         );
     }
 
@@ -36,13 +42,14 @@ class MessageEndpoint extends AbstractEndpoint
         Message $message,
         string $agentId,
         string $userId,
+        ?string $chatId = null,
         ?Closure $closure = null
     ): MessageOutput {
         $json = json_encode($message->toArray(), JSON_THROW_ON_ERROR);
         if (!$json) {
             throw new RuntimeException('Error encode message');
         }
-        $client = $this->getWsClient($agentId, $userId);
+        $client = $this->getWsClient($agentId, $userId, $chatId);
         $client->text($json);
 
         while (true) {

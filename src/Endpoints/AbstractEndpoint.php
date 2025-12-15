@@ -24,14 +24,14 @@ abstract class AbstractEndpoint
         return str_replace('//', '/', sprintf('/%s/%s', $this->prefix, $endpoint));
     }
 
-    protected function getHttpClient(?string $agentId = null, ?string $userId = null): Client
+    protected function getHttpClient(?string $agentId = null, ?string $userId = null, ?string $chatId = null): Client
     {
-        return $this->client->getHttpClient()->getClient($agentId, $userId);
+        return $this->client->getHttpClient()->getClient($agentId, $userId, $chatId);
     }
 
-    protected function getWsClient(string $agentId, string $userId): WebSocketClient
+    protected function getWsClient(string $agentId, string $userId, ?string $chatId = null): WebSocketClient
     {
-        return $this->client->getWsClient()->getClient($agentId, $userId);
+        return $this->client->getWsClient()->getClient($agentId, $userId, $chatId);
     }
 
     /**
@@ -87,13 +87,14 @@ abstract class AbstractEndpoint
         string $outputClass,
         ?array $payload = null,
         ?string $userId = null,
+        ?string $chatId = null,
     ): mixed {
         $options = [];
         if ($payload) {
             $options['json'] = $payload;
         }
 
-        $response = $this->getHttpClient($agentId, $userId)->post($endpoint, $options);
+        $response = $this->getHttpClient($agentId, $userId, $chatId)->post($endpoint, $options);
         if ($response->getStatusCode() !== 200) {
             throw new \RuntimeException(
                 sprintf('Failed to post data to endpoint %s: %s', $endpoint, $response->getReasonPhrase())
