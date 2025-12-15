@@ -2,7 +2,7 @@
 
 namespace DataMat\CheshireCat\Tests;
 
-use DataMat\CheshireCat\DTO\Api\Message\MessageOutput;
+use DataMat\CheshireCat\DTO\Api\Message\ChatOutput;
 use DataMat\CheshireCat\DTO\Message;
 use DataMat\CheshireCat\Tests\Traits\TestTrait;
 use GuzzleHttp\Exception\GuzzleException;
@@ -36,13 +36,13 @@ class MessageEndpointTest extends TestCase
             new Message($expected['text']), 'agent_id', 'user_id'
         );
 
-        self::assertInstanceOf(MessageOutput::class, $response);
+        self::assertInstanceOf(ChatOutput::class, $response);
 
-        self::assertEquals($response->text, $expected['text']);
-        self::assertEquals($response->content, $expected['text']);
-        self::assertEquals($response->type, $expected['type']);
-        self::assertEquals($response->why->input, $expected['why']['input']);
-        self::assertEquals($response->why->memory->declarative, $expected['why']['memory']['declarative']);
+        self::assertEquals($response->message->text, $expected['text']);
+        self::assertEquals($response->message->content, $expected['text']);
+        self::assertEquals($response->message->type, $expected['type']);
+        self::assertEquals($response->message->why->input, $expected['why']['input']);
+        self::assertEquals($response->message->why->memory->declarative, $expected['why']['memory']['declarative']);
     }
 
     /**
@@ -68,11 +68,11 @@ class MessageEndpointTest extends TestCase
             new Message($expected['text']), 'agent_id', 'user_id'
         );
 
-        self::assertInstanceOf(MessageOutput::class, $response);
+        self::assertInstanceOf(ChatOutput::class, $response);
 
-        self::assertEquals($response->text, $expected['text']);
-        self::assertEquals($response->type, $expected['type']);
-        self::assertEquals($response->why->input, $expected['why']['input']);
-        self::assertEquals($response->why->memory->declarative, $expected['why']['memory']['declarative']);
+        self::assertEquals($response->message->text, $expected['text']);
+        self::assertEquals($response->message->type, $expected['type']);
+        self::assertEquals($response->message->why->input, $expected['why']['input']);
+        self::assertEquals($response->message->why->memory->declarative, $expected['why']['memory']['declarative']);
     }
 }

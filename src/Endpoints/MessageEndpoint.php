@@ -2,7 +2,7 @@
 
 namespace DataMat\CheshireCat\Endpoints;
 
-use DataMat\CheshireCat\DTO\Api\Message\MessageOutput;
+use DataMat\CheshireCat\DTO\Api\Message\ChatOutput;
 use DataMat\CheshireCat\DTO\Message;
 use Closure;
 use Exception;
@@ -21,12 +21,12 @@ class MessageEndpoint extends AbstractEndpoint
         string $agentId,
         string $userId,
         ?string $chatId = null,
-    ): MessageOutput
+    ): ChatOutput
     {
         return $this->postJson(
             '/message',
             $agentId,
-            MessageOutput::class,
+            ChatOutput::class,
             $message->toArray(),
             $userId,
             $chatId,
@@ -44,7 +44,7 @@ class MessageEndpoint extends AbstractEndpoint
         string $userId,
         ?string $chatId = null,
         ?Closure $closure = null
-    ): MessageOutput {
+    ): ChatOutput {
         $json = json_encode($message->toArray(), JSON_THROW_ON_ERROR);
         if (!$json) {
             throw new RuntimeException('Error encode message');
@@ -68,6 +68,6 @@ class MessageEndpoint extends AbstractEndpoint
 
         $client->disconnect();
 
-        return $this->deserialize($content, MessageOutput::class);
+        return $this->deserialize($content, ChatOutput::class);
     }
 }
