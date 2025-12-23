@@ -48,11 +48,15 @@ class UtilsEndpoint extends AbstractEndpoint
      */
     public function postAgentCreate(string $agentId): CreatedOutput
     {
-        return $this->postJson(
-            $this->formatUrl('/agents/create/'),
-            $agentId,
-            CreatedOutput::class,
-        );
+        $endpoint = $this->formatUrl('/agents/create/');
+        $payload = ['agent_id' => $agentId];
+
+        $response = $this->getHttpClient()->post($endpoint, $payload);
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException('Failed to create agent');
+        }
+
+        return $this->deserialize($response, CreatedOutput::class);
     }
 
     /**
