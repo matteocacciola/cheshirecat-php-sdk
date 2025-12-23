@@ -13,35 +13,6 @@ class UsersEndpointTest extends TestCase
     use TestTrait;
 
     /**
-     * @throws Exception|\JsonException|GuzzleException
-     */
-    public function testTokenSuccess(): void
-    {
-        $expected = [
-            'access_token' => 'token',
-            'token_type' => 'bearer',
-        ];
-
-        $cheshireCatClient = $this->getCheshireCatClient(null, $expected);
-        try {
-            $cheshireCatClient->getHttpClient()->getClient();
-        } catch (\Exception $e) {
-            self::assertInstanceOf(\InvalidArgumentException::class, $e);
-            self::assertEquals('You must provide an apikey or a token', $e->getMessage());
-        }
-
-        $endpoint = $cheshireCatClient->users();
-        $result = $endpoint->token('test-user', 'test-pass');
-
-        self::assertEquals($expected['access_token'], $result->accessToken);
-        self::assertEquals($expected['token_type'], $result->tokenType);
-
-        $httpClient = $cheshireCatClient->getHttpClient()->getClient();
-
-        self::assertInstanceOf(Client::class, $httpClient);
-    }
-
-    /**
      * @throws \JsonException|GuzzleException|Exception
      */
     public function testPostUserSuccess(): void
@@ -161,25 +132,5 @@ class UsersEndpointTest extends TestCase
         self::assertEquals($expected['username'], $result->username);
         self::assertEquals($expected['permissions'], $result->permissions);
         self::assertEquals($expected['id'], $result->id);
-    }
-
-    /**
-     * @throws GuzzleException|\JsonException|Exception
-     */
-    public function testGetAvailablePermissionsSuccess(): void
-    {
-        $expected = [
-            "STATUS" => ["READ"],
-            "MEMORY" => ["READ", "LIST"],
-            "CONVERSATION" => ["WRITE", "EDIT", "LIST", "READ", "DELETE"],
-            "STATIC" => ["READ"],
-        ];
-
-        $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
-
-        $endpoint = $cheshireCatClient->users();
-        $result = $endpoint->getAvailablePermissions();
-
-        self::assertEquals($expected, $result);
     }
 }

@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Serializer;
 
 /**
  * @method \DataMat\CheshireCat\Endpoints\AdminsEndpoint admins()
+ * @method \DataMat\CheshireCat\Endpoints\AuthEndpoint auth()
  * @method \DataMat\CheshireCat\Endpoints\AuthHandlerEndpoint authHandler()
  * @method \DataMat\CheshireCat\Endpoints\ChunkerEndpoint chunker()
  * @method \DataMat\CheshireCat\Endpoints\ConversationEndpoint conversation()

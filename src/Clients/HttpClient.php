@@ -91,13 +91,13 @@ class HttpClient
                 $request = $request->withHeader('Authorization', 'Bearer ' . $this->apikey);
             }
             if (!empty($this->userId)) {
-                $request = $request->withHeader('user_id', $this->userId);
+                $request = $request->withHeader('X-User-ID', $this->userId);
             }
             if (!empty($this->agentId)) {
-                $request = $request->withHeader('agent_id', $this->agentId);
+                $request = $request->withHeader('X-Agent-ID', $this->agentId);
             }
             if (!empty($this->chatId)) {
-                $request = $request->withHeader('chat_id', $this->chatId);
+                $request = $request->withHeader('X-Chat-ID', $this->chatId);
             }
         };
     }
@@ -109,10 +109,10 @@ class HttpClient
                 $request = $request->withHeader('Authorization', 'Bearer ' . $this->token);
             }
             if (!empty($this->agentId)) {
-                $request = $request->withHeader('agent_id', $this->agentId);
+                $request = $request->withHeader('X-Agent-ID', $this->agentId);
             }
             if (!empty($this->chatId)) {
-                $request = $request->withHeader('chat_id', $this->chatId);
+                $request = $request->withHeader('X-Chat-ID', $this->chatId);
             }
         };
     }
