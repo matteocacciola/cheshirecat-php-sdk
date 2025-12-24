@@ -2,7 +2,10 @@
 
 namespace DataMat\CheshireCat\Endpoints;
 
+use DataMat\CheshireCat\DTO\Api\AgentMatchOutput;
+use DataMat\CheshireCat\DTO\Api\MeOutput;
 use DataMat\CheshireCat\DTO\Api\TokenOutput;
+use DataMat\CheshireCat\DTO\Api\UserMeOutput;
 use GuzzleHttp\Exception\GuzzleException;
 
 class AuthEndpoint extends AbstractEndpoint
@@ -15,13 +18,8 @@ class AuthEndpoint extends AbstractEndpoint
      *
      * @throws GuzzleException
      */
-    public function token(string $username, string $password, ?string $agentId = null): TokenOutput
+    public function token(string $username, string $password): TokenOutput
     {
-        $headers = [];
-        if ($agentId !== null) {
-            $headers['X-Agent-ID'] = $agentId;
-        }
-
         $httpClient = $this->client->getHttpClient()->createHttpClient();
 
         $response = $httpClient->post($this->formatUrl('/token'), [
@@ -29,7 +27,6 @@ class AuthEndpoint extends AbstractEndpoint
                 'username' => $username,
                 'password' => $password,
             ],
-            'headers' => $headers,
         ]);
 
         /** @var TokenOutput $result */
@@ -58,5 +55,35 @@ class AuthEndpoint extends AbstractEndpoint
         }
 
         return $this->client->getSerializer()->decode($response->getBody()->getContents(), 'json');
+    }
+
+    public function me(string $token): MeOutput
+    {
+        $this->client->addToken($token);
+        $response = $this->getHttpClient()->get($this->formatUrl('/me'));
+        if ($response->getStatusCode() !== 200) {
+            throw new \RuntimeException(
+                sprintf('Failed to fetch data from /me: %s', $response->getReasonPhrase())
+            );
+        }
+
+        $data = $this->client->getSerializer()->decode($response->getBody()->getContents(), 'json');
+
+        if (isset($data['agents']) && is_array($data['agents'])) {
+            foreach ($data['agents'] as &$agent) {
+                if (isset($agent['user'])) {
+                    $agent['user'] = $this->deserialize(
+                        $this->client->getSerializer()->encode($agent['user'], 'json'),
+                        UserMeOutput::class
+                    );
+                }
+                $agent = $this->deserialize(
+                    $this->client->getSerializer()->encode($agent, 'json'),
+                    AgentMatchOutput::class
+                );
+            }
+        }
+
+        return $this->deserialize($this->client->getSerializer()->encode($data, 'json'), MeOutput::class);
     }
 }
