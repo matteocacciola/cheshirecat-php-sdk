@@ -13,8 +13,6 @@ class MessageOutput extends MessageBase
 
     public ?bool $error = false;
 
-    public string $text;
-
     /**
      * @return array<string, mixed>
      */
@@ -24,7 +22,6 @@ class MessageOutput extends MessageBase
 
         $data['type'] = $this->type;
         $data['why'] = $this->why?->toArray();
-        $data['text'] = $this->text;
         $data['error'] = $this->error;
 
         return $data;
