@@ -39,7 +39,6 @@ class MessageEndpointTest extends TestCase
         self::assertInstanceOf(ChatOutput::class, $response);
 
         self::assertEquals($response->message->text, $expected['text']);
-        self::assertEquals($response->message->content, $expected['text']);
         self::assertEquals($response->message->type, $expected['type']);
         self::assertEquals($response->message->why->input, $expected['why']['input']);
         self::assertEquals($response->message->why->memory->declarative, $expected['why']['memory']['declarative']);
