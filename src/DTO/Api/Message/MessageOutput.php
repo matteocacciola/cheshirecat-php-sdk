@@ -13,18 +13,7 @@ class MessageOutput extends MessageBase
 
     public ?bool $error = false;
 
-    /** @deprecated */
-    public readonly string $content;
-
-    public function __construct(public string $text = '', public ?string $image = null)
-    {
-        $this->content = $text;
-    }
-
-    public function getContent(): string
-    {
-        return $this->text;
-    }
+    public string $text;
 
     /**
      * @return array<string, mixed>
@@ -35,7 +24,7 @@ class MessageOutput extends MessageBase
 
         $data['type'] = $this->type;
         $data['why'] = $this->why?->toArray();
-        $data['content'] = $this->text;
+        $data['text'] = $this->text;
         $data['error'] = $this->error;
 
         return $data;
