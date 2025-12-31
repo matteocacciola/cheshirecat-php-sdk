@@ -12,4 +12,10 @@ class UserMeOutput
 
     /** @var array<string, string[]> */
     public array $permissions;
+
+    #[SerializedName('created_at')]
+    public ?float $createdAt = null;
+
+    #[SerializedName('updated_at')]
+    public ?float $updatedAt = null;
 }
