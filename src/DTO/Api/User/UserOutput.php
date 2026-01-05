@@ -11,6 +11,9 @@ class UserOutput
     /** @var array<string, array<string>>  */
     public array $permissions;
 
+    /** @var array<string, mixed>|null  */
+    public ?array $metadata = null;
+
     #[SerializedName('created_at')]
     public ?float $createdAt = null;
 

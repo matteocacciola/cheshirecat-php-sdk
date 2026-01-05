@@ -33,6 +33,7 @@ class UsersEndpointTest extends TestCase
 
         self::assertEquals($expected['username'], $result->username);
         self::assertEquals($expected['permissions'], $result->permissions);
+        self::assertEquals(null, $result->metadata);
         self::assertEquals($expected['id'], $result->id);
     }
 
@@ -59,6 +60,7 @@ class UsersEndpointTest extends TestCase
         self::assertCount(1, $result);
         self::assertEquals($expected[0]['username'], $result[0]->username);
         self::assertEquals($expected[0]['permissions'], $result[0]->permissions);
+        self::assertEquals(null, $result[0]->metadata);
         self::assertEquals($expected[0]['id'], $result[0]->id);
     }
 
@@ -82,6 +84,7 @@ class UsersEndpointTest extends TestCase
 
         self::assertEquals($expected['username'], $result->username);
         self::assertEquals($expected['permissions'], $result->permissions);
+        self::assertEquals(null, $result->metadata);
         self::assertEquals($expected['id'], $result->id);
     }
 
@@ -108,6 +111,7 @@ class UsersEndpointTest extends TestCase
 
         self::assertEquals($expected['username'], $result->username);
         self::assertEquals($expected['permissions'], $result->permissions);
+        self::assertEquals(null, $result->metadata);
         self::assertEquals($expected['id'], $result->id);
     }
 
@@ -131,6 +135,7 @@ class UsersEndpointTest extends TestCase
 
         self::assertEquals($expected['username'], $result->username);
         self::assertEquals($expected['permissions'], $result->permissions);
+        self::assertEquals(null, $result->metadata);
         self::assertEquals($expected['id'], $result->id);
     }
 }

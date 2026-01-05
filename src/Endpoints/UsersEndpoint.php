@@ -15,6 +15,7 @@ class UsersEndpoint extends AbstractEndpoint
      * of the user in the system and are defined by the system administrator.
      *
      * @param array<string, mixed>|null $permissions
+     * @param array<string, mixed>|null $metadata
      *
      * @throws GuzzleException
      */
@@ -23,6 +24,7 @@ class UsersEndpoint extends AbstractEndpoint
         string $username,
         string $password,
         ?array $permissions = null,
+        ?array $metadata = null,
     ): UserOutput {
         $payload = [
             'username' => $username,
@@ -30,6 +32,9 @@ class UsersEndpoint extends AbstractEndpoint
         ];
         if ($permissions !== null) {
             $payload['permissions'] = $permissions;
+        }
+        if ($metadata !== null) {
+            $payload['metadata'] = $metadata;
         }
 
         return $this->postJson(
@@ -91,6 +96,7 @@ class UsersEndpoint extends AbstractEndpoint
      * are defined by the system administrator.
      *
      * @param array<string, mixed>|null $permissions
+     * @param array<string, mixed>|null $metadata
      *
      * @throws GuzzleException
      */
@@ -100,6 +106,7 @@ class UsersEndpoint extends AbstractEndpoint
         ?string $username = null,
         ?string $password = null,
         ?array $permissions = null,
+        ?array $metadata = null,
     ): UserOutput {
         $payload = [];
         if ($username !== null) {
@@ -110,6 +117,9 @@ class UsersEndpoint extends AbstractEndpoint
         }
         if ($permissions !== null) {
             $payload['permissions'] = $permissions;
+        }
+        if ($metadata !== null) {
+            $payload['metadata'] = $metadata;
         }
 
         return $this->put(
