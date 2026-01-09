@@ -7,19 +7,19 @@ use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 
-class AuthHandlerEndpointTest extends TestCase
+class AgenticWorkflowEndpointTest extends TestCase
 {
     use TestTrait;
 
     /**
      * @throws GuzzleException|\JsonException|Exception
      */
-    public function testGetAuthHandlersSettingsSuccess(): void
+    public function testGetAgenticWorkflowsSettingsSuccess(): void
     {
         $expected = [
             'settings' => [
                 [
-                    'name' => 'testAuthHandler',
+                    'name' => 'testAgenticWorkflow',
                     'value' => [
                         'property_first' => 'value_first',
                         'property_second' => 'value_second',
@@ -30,13 +30,13 @@ class AuthHandlerEndpointTest extends TestCase
                     ],
                 ],
             ],
-            'selected_configuration' => 'testAuthHandler',
+            'selected_configuration' => 'testAgenticWorkflow',
         ];
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cheshireCatClient->authHandler();
-        $result = $endpoint->getAuthHandlersSettings('agent');
+        $endpoint = $cheshireCatClient->agenticWorkflow();
+        $result = $endpoint->getAgenticWorkflowsSettings('agent');
 
         foreach ($expected['settings'] as $key => $setting) {
             self::assertEquals($setting['name'], $result->settings[$key]->name);
@@ -53,10 +53,10 @@ class AuthHandlerEndpointTest extends TestCase
     /**
      * @throws GuzzleException|\JsonException|Exception
      */
-    public function testGetAuthHandlerSettingsSuccess(): void
+    public function testGetAgenticWorkflowSettingsSuccess(): void
     {
         $expected = [
-            'name' => 'testAuthHandler',
+            'name' => 'testAgenticWorkflow',
             'value' => [
                 'property_first' => 'value_first',
                 'property_second' => 'value_second',
@@ -69,8 +69,8 @@ class AuthHandlerEndpointTest extends TestCase
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cheshireCatClient->authHandler();
-        $result = $endpoint->getAuthHandlerSettings('testAuthHandler', 'agent');
+        $endpoint = $cheshireCatClient->agenticWorkflow();
+        $result = $endpoint->getAgenticWorkflowSettings('testAgenticWorkflow', 'agent');
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {
@@ -84,10 +84,10 @@ class AuthHandlerEndpointTest extends TestCase
     /**
      * @throws GuzzleException|\JsonException|Exception
      */
-    public function testPutAuthHandlerSettingsSuccess(): void
+    public function testPutAgenticWorkflowSettingsSuccess(): void
     {
         $expected = [
-            'name' => 'testAuthHandler',
+            'name' => 'testAgenticWorkflow',
             'value' => [
                 'property_first' => 'value_first',
                 'property_second' => 'value_second',
@@ -96,8 +96,8 @@ class AuthHandlerEndpointTest extends TestCase
 
         $cheshireCatClient = $this->getCheshireCatClient($this->apikey, $expected);
 
-        $endpoint = $cheshireCatClient->authHandler();
-        $result = $endpoint->putAuthHandlerSettings('testAuthHandler', 'agent', $expected['value']);
+        $endpoint = $cheshireCatClient->agenticWorkflow();
+        $result = $endpoint->putAgenticWorkflowSettings('testAgenticWorkflow', 'agent', $expected['value']);
 
         self::assertEquals($expected['name'], $result->name);
         foreach ($expected['value'] as $property => $value) {

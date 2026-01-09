@@ -44,7 +44,7 @@ class FileManagerEndpointTest extends TestCase
                 self::assertEquals($value, $result->settings[$key]->value[$property]);
             }
             foreach ($setting['scheme'] as $property => $value) {
-                self::assertEquals($value, $result->settings[$key]->scheme[$property]);
+                self::assertEquals($value, $result->settings[$key]->getScheme()[$property]);
             }
         }
         self::assertEquals($expected['selected_configuration'], $result->selectedConfiguration);
@@ -77,7 +77,7 @@ class FileManagerEndpointTest extends TestCase
             self::assertEquals($value, $result->value[$property]);
         }
         foreach ($expected['scheme'] as $property => $value) {
-            self::assertEquals($value, $result->scheme[$property]);
+            self::assertEquals($value, $result->getScheme()[$property]);
         }
     }
 
